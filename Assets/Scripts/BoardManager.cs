@@ -48,31 +48,31 @@ public class BoardManager : MonoBehaviour {
 			for (int x = 0; x < width; x++) {
 				switch (level [z] [x]) {
 				case ft:
-					Instantiate (FloorTop, new Vector3 (x, -z, 0), Quaternion.identity);
+					Instantiate (FloorTop, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				case ftl:
-					Instantiate (FloorTopLeft, new Vector3 (x, -z, 0), Quaternion.identity);
+					Instantiate (FloorTopLeft, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				case ftr:
-					Instantiate (FloorTopRight, new Vector3 (x, -z, 0), Quaternion.identity);
+					Instantiate (FloorTopRight, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				case fm:
-					Instantiate (FloorMiddle, new Vector3 (x, -z, 0), Quaternion.identity);
+					Instantiate (FloorMiddle, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				case fl:
-					Instantiate (FloorLeft, new Vector3 (x, -z, 0), Quaternion.identity);
+					Instantiate (FloorLeft, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				case fr:
-					Instantiate (FloorRight, new Vector3 (x, -z, 0), Quaternion.identity);
+					Instantiate (FloorRight, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				case fb:
-					Instantiate (FloorBottom, new Vector3 (x, -z, 0), Quaternion.identity);
+					Instantiate (FloorBottom, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				case fbr:
-					Instantiate (FloorBottomRight, new Vector3 (x, -z, 0), Quaternion.identity);
+					Instantiate (FloorBottomRight, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				case fbl:
-					Instantiate (FloorBottomLeft, new Vector3 (x, -z, 0), Quaternion.identity);
+					Instantiate (FloorBottomLeft, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				}
 			}
