@@ -20,7 +20,7 @@ public class LevelReader : MonoBehaviour {
 		//Map = currentSceneName [2];
 		//string fileName =  "difficulty" + Difficulty + "-map" + Map;
 		TextAsset text = (TextAsset)Resources.Load ("level1", typeof(TextAsset));				//Load the file from the Resources folder
-		
+
 		Level = readFile (text);		//Read the text file and assign back into two dimensional array
 	}
 	
