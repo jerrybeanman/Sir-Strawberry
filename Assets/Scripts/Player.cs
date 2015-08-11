@@ -198,7 +198,7 @@ public class Player : MovingObject
 	}
 
 	IEnumerator WaitForMovement() {
-		yield return new WaitForSeconds (.1f);
+		yield return new WaitForSeconds (0.05f);
 		isMoving = false;
 	}
 }
