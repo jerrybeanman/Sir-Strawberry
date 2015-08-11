@@ -8,7 +8,9 @@ public class Inventory : MonoBehaviour {
 	public int width, height;
 	public GUISkin skin;
 
+	//contains valid/existing items that the player already have
 	private List<Item> inventory = new List<Item>();
+	//the total number of slots in the inventory, each slot will have a item (if not, Item.Exist is default to false) so we can manipulate with the inventory
 	private List<Item> slots = new List<Item>();
 	private bool showInventory;
 	private bool showTooltip;
@@ -16,6 +18,7 @@ public class Inventory : MonoBehaviour {
 
 	private bool draggingItem;
 	private Item draggedItem;
+	private int prevIndex;
 
 	void Awake()
 	{
@@ -42,10 +45,10 @@ public class Inventory : MonoBehaviour {
 		showInventory = !showInventory;
 	}
 
+	
 	void OnGUI()
 	{
-
-
+		
 		GUI.skin = skin;
 
 		if(showInventory)
@@ -54,10 +57,12 @@ public class Inventory : MonoBehaviour {
 			if(showTooltip)
 				DrawTooltip();
 		}
+
+		/*
+		 * not working
 		if(draggingItem)
-		{
 			DrawDraggingItem();
-		}
+		*/
 
 		//displaying current inventory items as text whether if the inventory is open or not.
 		// *for testing purposes*
@@ -77,28 +82,65 @@ public class Inventory : MonoBehaviour {
 		{
 			for(int x = 0; x < width; x++)
 			{
-				Rect slotRect = new Rect(110 + x * 50, 50 + y * 50, 40, 40);
+				Rect slotRect = new Rect(Screen.width / 3 + x * Screen.width / 7, Screen.height / 9.6f + y * Screen.height / 10, Screen.width / 8, Screen.height / 12);
+				//draw inventory
 				GUI.Box (slotRect, "", skin.GetStyle ("Slot"));
 
+				//assign all item in the inventory to slots so we can keep track what each slot contains
 				slots[i] = inventory[i];
+				//check if an existing item is assigned to slot
 				if(slots[i].Exist)
 				{
-					GUI.DrawTexture (new Rect(115 + x * 50, 25 + y * 50, 60, 60), slots[i].itemIcon);
+					Item item = slots[i];
+					//draw the item
+					GUI.DrawTexture (slotRect, item.itemIcon);
 
-					//Check if mouse is clicked on an existing item, generate tooltip
-					if(slotRect.Contains(e.mousePosition) && Input.GetMouseButtonDown(0))
+					//Check if mouse is hovering over an existing item
+					if(slotRect.Contains(e.mousePosition))
 					{
-						GenerateTooltip(slots[i]);
-						showTooltip = true;
-
-						//Check if mouse is clicked on an existing item and it is "dragged"
-						if(Input.GetMouseButtonDown(0) && e.type == EventType.mouseDrag)
+						//if mouse is left clicked on the item
+						if(Input.GetMouseButtonDown(0))
 						{
-							print ("gh");
-							draggingItem = true;
-							draggedItem = slots[i];
+							GenerateTooltip(item);
+							showTooltip = true;
 						}
-					}
+
+						//if mouse is right clicked on the item
+						if(e.isMouse && e.type == EventType.mouseDown && e.button == 1)
+						{
+							if(item.itemType == Item.ItemType.Weapon)
+							{
+								EquipWeapon(i);
+							}
+
+							if(item.itemType == Item.ItemType.Armor)
+							{
+								EquipArmor(i);
+							}
+						}
+
+						/**
+						 * drag & drop feature, currently not working. 
+						//Check if mouse is clicked on an existing item and it is "dragged"
+						if(e.button ==  0 && e.type == EventType.mouseDrag && !draggingItem)
+						{
+							draggingItem = true;
+							prevIndex = i;
+							draggedItem = slots[i];
+
+							//delete the item by making it an empty item
+							inventory[i] = new Item();
+						}
+
+						//Check if mouse is release while draggging an item
+						if(e.type == EventType.mouseUp && draggingItem)
+						{
+							inventory[prevIndex] = inventory[i];
+							inventory[i] = draggedItem;
+							draggingItem = false;
+							draggedItem = null;
+						}*/
+					} 
 				}
 				i++;
 			}
@@ -123,7 +165,7 @@ public class Inventory : MonoBehaviour {
 
 	void DrawTooltip()
 	{
-		GUI.Box (new Rect(110, 300, 200, 125), tooltip, skin.GetStyle("Tooltip"));
+		GUI.Box (new Rect(Screen.width / 2.5f, Screen.height / 1.65f, Screen.width / 1.75f, Screen.height / 4), tooltip, skin.GetStyle("Tooltip"));
 	}
 
 	public void AddItem(int id)
@@ -155,6 +197,9 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
+
+
+
 	//Check if the inventory contains an item with the corresponding id
 	// *not used yet*
 	bool Contain(int id)
@@ -166,7 +211,16 @@ public class Inventory : MonoBehaviour {
 		}
 		return false;
 	}
-	
+
+	private void EquipWeapon(int i)
+	{
+		print ("Weapon Equipped");
+		inventory[i] = new Item();
+	}
+	private void EquipArmor(int i){
+		print ("Armor Euipped");
+		inventory[i] = new Item();
+	}
 }
 
 
