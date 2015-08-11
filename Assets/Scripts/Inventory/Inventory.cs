@@ -165,7 +165,7 @@ public class Inventory : MonoBehaviour {
 
 	void DrawTooltip()
 	{
-		GUI.Box (new Rect(Screen.width / 2.5f, Screen.height / 1.65f, Screen.width / 1.75f, Screen.height / 4), tooltip, skin.GetStyle("Tooltip"));
+		GUI.Box (new Rect(Screen.width / 2.5f, Screen.height / 1.65f, Screen.width / 1.75f, Screen.height / 3.75f), tooltip, skin.GetStyle("Tooltip"));
 	}
 
 	public void AddItem(int id)

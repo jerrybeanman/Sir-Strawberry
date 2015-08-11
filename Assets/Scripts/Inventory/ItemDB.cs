@@ -28,6 +28,6 @@ public class ItemDB : MonoBehaviour {
 	{
 		items.Add (new Item(0, "Blue Potion", "gives mana banana", 0, 0, 20, Item.ItemType.Potion));
 		items.Add (new Item(1, "Silver Plate", "plate madse of silver", 0, 20, 0, Item.ItemType.Weapon));
-		items.Add (new Item(2, "Dagger", "Something something something something something", 20, 0, 0, Item.ItemType.Weapon));
+		items.Add (new Item(2, "Dagger", "Something something something", 20, 0, 0, Item.ItemType.Weapon));
 	}
 }
