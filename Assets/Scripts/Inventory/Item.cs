@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
@@ -7,32 +7,40 @@ public class Item {
 	public int itemID;
 	public string itemDesc;
 	public int itemPower;
-	public int itemSpeed;
 	public int itemHp;
+	public int itemMp;
 	public Texture2D itemIcon;
 	public ItemType itemType;
-	[HideInInspector]public bool exist = false;
-	
+
+	//This bool shows wether if the current within the player's inventory 
+	private bool exist = false;
+	public bool Exist
+	{
+		get
+		{
+			return exist;
+		}
+	}
+
+	//types of different items that we will have in our game
 	public enum ItemType {
 		Weapon,
-		Consumable,
+		Potion,
 		Armor
 	}
 
-	public Item(string name, int id, string desc, int power, int speed, ItemType type)
+	public Item(int id, string name, string desc, int power, int hp, int mp, ItemType type)
 	{
 		itemName = name;
 		itemID = id;
 		itemDesc = desc;
 		itemPower = power;
-		itemSpeed = speed;
+		itemHp = hp;
+		itemMp = mp;
 		itemType = type;
 		exist = true;
 		itemIcon = Resources.Load<Texture2D>("Item Icons/" + name);
 	}
 
-	public Item()
-	{
-
-	}
+	public Item(){	}
 }
