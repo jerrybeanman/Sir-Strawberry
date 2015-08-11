@@ -13,6 +13,9 @@ public class Player : MovingObject
 	private Animator animator;                  //Used to store a reference to the Player's animator component.
 	//private int food;                           //Used to store player food points total during level.
 	private int health;
+	private Vector3 position;
+	//private Transform transform;
+	private bool isMoving = false;
 	
 	
 	//Start overrides the Start function of MovingObject
@@ -20,6 +23,9 @@ public class Player : MovingObject
 	{
 		//Get a component reference to the Player's animator component
 		animator = GetComponent<Animator>();
+
+		position = transform.position;
+		//transform = transform;
 		
 		//Get the current food point total stored in GameManager.instance between levels.
 		//food = GameManager.instance.playerFoodPoints;
@@ -40,32 +46,40 @@ public class Player : MovingObject
 	
 	private void Update ()
 	{
+		if (isMoving) {
+			return;
+		}
+		isMoving = true;
 		//If it's not the player's turn, exit the function.
 		//if(!GameManager.instance.playersTurn) return;
-		
 		int horizontal = 0;     //Used to store the horizontal move direction.
 		int vertical = 0;       //Used to store the vertical move direction.
 		
 		
 		//Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
-		horizontal = (int) (Input.GetAxisRaw ("Horizontal"));
-		
+		horizontal = (int)(Input.GetAxisRaw ("Horizontal"));
+
 		//Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
-		vertical = (int) (Input.GetAxisRaw ("Vertical"));
-		
+		vertical = (int)(Input.GetAxisRaw ("Vertical"));
+
+
 		//Check if moving horizontally, if so set vertical to zero.
-		if(horizontal != 0)
-		{
+		if (horizontal != 0) {
 			vertical = 0;
+		}
+		if (vertical != 0) {
+			horizontal = 0;
 		}
 		
 		//Check if we have a non-zero value for horizontal or vertical
-		if(horizontal != 0 || vertical != 0)
-		{
+		if (horizontal != 0 || vertical != 0) {
 			//Call AttemptMove passing in the generic parameter Wall, since that is what Player may interact with if they encounter one (by attacking it)
 			//Pass in horizontal and vertical as parameters to specify the direction to move Player in.
 			AttemptMove<Wall> (horizontal, vertical);
 		}
+
+		StartCoroutine (WaitForMovement ());
+
 	}
 	
 	//AttemptMove overrides the AttemptMove function in the base class MovingObject
@@ -181,5 +195,10 @@ public class Player : MovingObject
 			//GameManager.instance.GameOver ();
 		}
 		*/
+	}
+
+	IEnumerator WaitForMovement() {
+		yield return new WaitForSeconds (0.05f);
+		isMoving = false;
 	}
 }
