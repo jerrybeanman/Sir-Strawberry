@@ -120,7 +120,6 @@ public class Inventory : MonoBehaviour {
 				slots[i] = inventory[i];
 				//Current item
 				Item item = slots[i];
-
 				//check if an existing item is assigned to slot
 				if(item.Exist)
 				{
@@ -194,7 +193,7 @@ public class Inventory : MonoBehaviour {
 	void DrawDraggingItem()
 	{
 		//draw the item texture while dragging at a position 15x, 15y pixels relative to the mouse position
-		GUI.DrawTexture(new Rect(Event.current.mousePosition.x + 15, Event.current.mousePosition.y, 50, 50), draggedItem.itemIcon);
+		GUI.DrawTexture(new Rect(Event.current.mousePosition.x + 15, Event.current.mousePosition.y, 50, 50), Resources.Load<Texture2D>("Item Icons/" + draggedItem.itemName));
 	}
 
 	void DrawTooltip()

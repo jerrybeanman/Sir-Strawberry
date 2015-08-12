@@ -9,7 +9,6 @@ public class Item {
 	public int itemPower;
 	public int itemHp;
 	public int itemMp;
-	public Texture2D itemIcon;
 	public ItemType itemType;
 
 	//This bool shows wether if the current within the player's inventory 
@@ -38,7 +37,6 @@ public class Item {
 		itemMp = mp;
 		itemType = type;
 		exist = true;
-		itemIcon = Resources.Load<Texture2D>("Item Icons/" + name);
 	}
 
 	public Item(){	}
