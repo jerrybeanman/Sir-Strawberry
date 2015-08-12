@@ -21,7 +21,6 @@ public class Item {
 			return exist;
 		}
 	}
-
 	//types of different items that we will have in our game
 	public enum ItemType {
 		Weapon,
