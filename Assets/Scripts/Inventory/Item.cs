@@ -9,7 +9,7 @@ public class Item {
 	public int itemPower;
 	public int itemHp;
 	public int itemMp;
-	[System.NonSerialized]public Texture2D itemIcon;
+	public Texture2D itemIcon;
 	public ItemType itemType;
 	public byte[] bytes;
 
@@ -23,7 +23,6 @@ public class Item {
 			return exist;
 		}
 	}
-
 	//types of different items that we will have in our game
 	public enum ItemType {
 		Weapon,

@@ -3,6 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
+	[System.Serializable]
+	public class Position
+	{
+		public float xCor;
+		public float yCor;
+	}
+	[System.Serializable]
+	public class Spacing
+	{
+		public float width;
+		public float height;
+	}
+	//position where the inventory is in the game
+	public Position position;
+	//spacing between each slot
+	public Spacing spacing;
 	//Used for singleton design pattern
 	public static Inventory instance = null;
 	//the grid size of the inventory
@@ -72,11 +88,8 @@ public class Inventory : MonoBehaviour {
 				DrawTooltip();
 		}
 
-		/*
-		 * not working
 		if(draggingItem)
 			DrawDraggingItem();
-		*/
 
 		//displaying current inventory items as text whether if the inventory is open or not. *TESTING PURPOSES*
 		for (int i = 0; i < inventory.Count; i++) 
@@ -88,7 +101,7 @@ public class Inventory : MonoBehaviour {
 		if (GUI.Button (new Rect (100, 190, 100, 40), "load items")) {
 			Load ();
 		}
-
+		
 	}
 
 	void DrawInventory()
@@ -104,47 +117,44 @@ public class Inventory : MonoBehaviour {
 			for(int x = 0; x < width; x++)
 			{
 				//position to draw Empty slots and items. This is scaled so to the size of the screen so it is platform independent
-				Rect slotRect = new Rect(Screen.width / 3 + x * Screen.width / 7, Screen.height / 9.6f + y * Screen.height / 10, Screen.width / 8, Screen.height / 12);
+				Rect slotRect = new Rect(Screen.width / position.xCor + x * Screen.width / spacing.width, Screen.height / position.yCor + y * Screen.height / spacing.height, Screen.width / 8, Screen.height / 12);
 				//draw inventory
 				GUI.Box (slotRect, "", skin.GetStyle ("Slot"));
 
 				//assign all item in the inventory to slots so we can keep track what each slot contains
 				slots[i] = inventory[i];
+				//Current item
+				Item item = slots[i];
+
 				//check if an existing item is assigned to slot
-				if(slots[i].Exist)
+				if(item.Exist)
 				{
-					//Current item
-					Item item = slots[i];
 					//draw the item
-					GUI.DrawTexture (slotRect, item.itemIcon);
+					GUI.DrawTexture (slotRect, Resources.Load<Texture2D>("Item Icons/" + item.itemName));
 
 					//Check if mouse is hovering over an existing item
-					if(slotRect.Contains(e.mousePosition))
+					if(slotRect.Contains(e.mousePosition) )//&& Input.GetMouseButtonDown(0))
 					{
-						//if mouse is left clicked on the item
-						if(Input.GetMouseButtonDown(0))
-						{
-							GenerateTooltip(item);
-							showTooltip = true;
-						}
+						GenerateTooltip(item);
+						showTooltip = true;
 
 						//if mouse is right clicked on the item
 						if(e.isMouse && e.type == EventType.mouseDown && e.button == 1)
 						{
 							if(item.itemType == Item.ItemType.Weapon)
-								EquipWeapon(i);
+								EquipWeapon(item, i);
 
 							if(item.itemType == Item.ItemType.Armor)
-								EquipArmor(i);
+								EquipArmor(item, i);
 
 							if(item.itemType == Item.ItemType.Potion)
-								EquipPotion(i);
+								EquipPotion(item, i);
 						}
 
-						/**
-						 * drag & drop feature *CURRENTLY NOT WORKING* 
+			
+						// drag & drop feature *CURRENTLY NOT WORKING* 
 						//Check if mouse is clicked on an existing item and it is "dragged"
-						if(e.button ==  0 && e.type == EventType.mouseDrag && !draggingItem)
+						if(e.button == 0 && e.type == EventType.mouseDrag && !draggingItem)
 						{
 							draggingItem = true;
 							prevIndex = i;
@@ -161,8 +171,15 @@ public class Inventory : MonoBehaviour {
 							inventory[i] = draggedItem;
 							draggingItem = false;
 							draggedItem = null;
-						}*/
+						}
 					} 
+				}else 
+				//if dragged item is hovering over an empty slot
+				if(slotRect.Contains(e.mousePosition) && e.type == EventType.mouseUp && draggingItem)
+				{
+					inventory[i] = draggedItem;
+					draggingItem = false;
+					draggedItem = null;
 				}
 				i++;
 			}
@@ -233,16 +250,16 @@ public class Inventory : MonoBehaviour {
 		return false;
 	}
 
-	private void EquipWeapon(int i)
+	private void EquipWeapon(Item item, int i)
 	{
 		print ("Weapon Equipped");
 		inventory[i] = new Item();
 	}
-	private void EquipArmor(int i){
+	private void EquipArmor(Item item, int i){
 		print ("Armor Euipped");
 		inventory[i] = new Item();
 	}
-	private void EquipPotion(int i){
+	private void EquipPotion(Item item, int i){
 		print ("Potion Euipped");
 		inventory[i] = new Item();
 	}
