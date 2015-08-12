@@ -15,10 +15,17 @@ public class Inventory : MonoBehaviour {
 		public float width;
 		public float height;
 	}
+	[System.Serializable]
+	public class SlotSize
+	{
+		public float width;
+		public float height;
+	}
 	//position where the inventory is in the game
 	public Position position;
 	//spacing between each slot
 	public Spacing spacing;
+	public SlotSize slotsize;
 	//Used for singleton design pattern
 	public static Inventory instance = null;
 	//the grid size of the inventory
@@ -105,7 +112,7 @@ public class Inventory : MonoBehaviour {
 			for(int x = 0; x < width; x++)
 			{
 				//position to draw Empty slots and items. This is scaled so to the size of the screen so it is platform independent
-				Rect slotRect = new Rect(Screen.width / position.xCor + x * Screen.width / spacing.width, Screen.height / position.yCor + y * Screen.height / spacing.height, Screen.width / 8, Screen.height / 12);
+				Rect slotRect = new Rect(Screen.width / position.xCor + x * Screen.width / spacing.width, Screen.height / position.yCor + y * Screen.height / spacing.height, Screen.width / slotsize.width, Screen.height / slotsize.height);
 				//draw inventory
 				GUI.Box (slotRect, "", skin.GetStyle ("Slot"));
 
