@@ -15,10 +15,17 @@ public class Inventory : MonoBehaviour {
 		public float width;
 		public float height;
 	}
+	[System.Serializable]
+	public class SlotSize
+	{
+		public float width;
+		public float height;
+	}
 	//position where the inventory is in the game
 	public Position position;
 	//spacing between each slot
 	public Spacing spacing;
+	public SlotSize slotsize;
 	//Used for singleton design pattern
 	public static Inventory instance = null;
 	//the grid size of the inventory
@@ -117,7 +124,7 @@ public class Inventory : MonoBehaviour {
 			for(int x = 0; x < width; x++)
 			{
 				//position to draw Empty slots and items. This is scaled so to the size of the screen so it is platform independent
-				Rect slotRect = new Rect(Screen.width / position.xCor + x * Screen.width / spacing.width, Screen.height / position.yCor + y * Screen.height / spacing.height, Screen.width / 8, Screen.height / 12);
+				Rect slotRect = new Rect(Screen.width / position.xCor + x * Screen.width / spacing.width, Screen.height / position.yCor + y * Screen.height / spacing.height, Screen.width / slotsize.width, Screen.height / slotsize.height);
 				//draw inventory
 				GUI.Box (slotRect, "", skin.GetStyle ("Slot"));
 
@@ -125,6 +132,7 @@ public class Inventory : MonoBehaviour {
 				slots[i] = inventory[i];
 				//Current item
 				Item item = slots[i];
+				Texture2D itemIcon = Resources.Load<Texture2D>("Item Icons/" + item.itemName);
 
 				//check if an existing item is assigned to slot
 				if(item.Exist)
@@ -264,15 +272,16 @@ public class Inventory : MonoBehaviour {
 		inventory[i] = new Item();
 	}
 
-	
+	// This is a temporary save function. This can be moved to 'add item to inventory'
 	public void Save() {
 		GameManager.manager.inventory = inventory;
 		GameManager.manager.slots = slots;
 	}
 
+	// This is a temporary load function. This can be moved to 'awake' or start perhaps.
 	public void Load() {
 		inventory = GameManager.manager.inventory;
-		//slots = GameManager.manager.slots;
+		slots = GameManager.manager.slots;
 		showInventory = true;
 	}
 

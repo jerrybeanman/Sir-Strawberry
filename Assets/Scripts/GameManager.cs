@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour {
 			experience = data.experience;
 
 			inventory = data.inventory;
-			//slots = data.slots;
+			slots = data.slots;
 		} else {
 			print("You do not have a saved file to load");
 		}
@@ -81,13 +81,13 @@ public class GameManager : MonoBehaviour {
 
 }
 
-// This class holds our persistent data.
+// This class holds our persistent data. It it what is saved to local machine/server.
 // eg. items, health, level, experience, ...
 [Serializable]
 class PlayerData {
 	public float health;
 	public float experience;
 	public List<Item> inventory;
-	//public List<Item> slots;
+	public List<Item> slots;
 
 }
