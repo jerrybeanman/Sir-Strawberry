@@ -147,6 +147,7 @@ public class Player : MovingObject
 		//If Move returns true, meaning Player was able to move into an empty space.
 		if (Move (xDir, yDir, out hit)) 
 		{
+			GameManager.manager.health++;
 			//Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
 		}
 		
@@ -247,7 +248,7 @@ public class Player : MovingObject
 	}
 
 	IEnumerator WaitForMovement() {
-		yield return new WaitForSeconds (0.05f);
+		yield return new WaitForSeconds (0.1f);
 		isMoving = false;
 	}
 }

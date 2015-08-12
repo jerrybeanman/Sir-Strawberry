@@ -33,4 +33,5 @@ public class ItemDB : MonoBehaviour {
 		items.Add (new Item(1, "Silver Plate", "plate madse of silver", 0, 20, 0, Item.ItemType.Weapon));
 		items.Add (new Item(2, "Dagger", "Daggur muh niggur", 20, 0, 0, Item.ItemType.Weapon));
 	}
+
 }

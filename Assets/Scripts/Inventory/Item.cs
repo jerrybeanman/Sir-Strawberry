@@ -9,11 +9,13 @@ public class Item {
 	public int itemPower;
 	public int itemHp;
 	public int itemMp;
-	public Texture2D itemIcon;
+	[System.NonSerialized]public Texture2D itemIcon;
 	public ItemType itemType;
+	public byte[] bytes;
 
 	//This bool shows wether if the current within the player's inventory 
 	private bool exist = false;
+
 	public bool Exist
 	{
 		get

@@ -81,6 +81,14 @@ public class Inventory : MonoBehaviour {
 		//displaying current inventory items as text whether if the inventory is open or not. *TESTING PURPOSES*
 		for (int i = 0; i < inventory.Count; i++) 
 			GUI.Label (new Rect(10,i * 20,200,50), inventory[i].itemName);
+
+		if (GUI.Button (new Rect (100, 150, 100, 40), "save items")) {
+			Save ();
+		}
+		if (GUI.Button (new Rect (100, 190, 100, 40), "load items")) {
+			Load ();
+		}
+
 	}
 
 	void DrawInventory()
@@ -238,6 +246,20 @@ public class Inventory : MonoBehaviour {
 		print ("Potion Euipped");
 		inventory[i] = new Item();
 	}
+
+	
+	public void Save() {
+		GameManager.manager.inventory = inventory;
+		GameManager.manager.slots = slots;
+	}
+
+	public void Load() {
+		inventory = GameManager.manager.inventory;
+		//slots = GameManager.manager.slots;
+		showInventory = true;
+	}
+
+
 }
 
 
