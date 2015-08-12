@@ -16,6 +16,7 @@ public class ItemDB : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 	}
 
+	//items should be encapsulated so its READ only
 	public List<Item> Items
 	{
 		get
@@ -24,10 +25,12 @@ public class ItemDB : MonoBehaviour {
 		}
 	}
 
+	//Generate some data for testing purposes.
+	//Can also try reading item informations through a xml file
 	void Start()
 	{
 		items.Add (new Item(0, "Blue Potion", "gives mana banana", 0, 0, 20, Item.ItemType.Potion));
 		items.Add (new Item(1, "Silver Plate", "plate madse of silver", 0, 20, 0, Item.ItemType.Weapon));
-		items.Add (new Item(2, "Dagger", "Something something something", 20, 0, 0, Item.ItemType.Weapon));
+		items.Add (new Item(2, "Dagger", "Daggur muh niggur", 20, 0, 0, Item.ItemType.Weapon));
 	}
 }

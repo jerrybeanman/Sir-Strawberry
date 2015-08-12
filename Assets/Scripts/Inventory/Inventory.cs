@@ -3,30 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
-
+	//Used for singleton design pattern
 	public static Inventory instance = null;
+	//the grid size of the inventory
 	public int width, height;
+	//Some custom GUI styles for fun
 	public GUISkin skin;
 
 	//contains valid/existing items that the player already have
 	private List<Item> inventory = new List<Item>();
 	//the total number of slots in the inventory, each slot will have a item (if not, Item.Exist is default to false) so we can manipulate with the inventory
 	private List<Item> slots = new List<Item>();
+	//set to true when inventory button is pressed
 	private bool showInventory;
+	//set to true when an item is pressed in the inventory menu
 	private bool showTooltip;
+	//information to display in the tooltip box
 	private string tooltip;
 
+	//set tot true when a item is currently being dragged. *DOES NOT WORK*
 	private bool draggingItem;
+	//current item that is being dragged. *DOES NOT WORK*
 	private Item draggedItem;
+	//The index where the item is being dragged off of so we can swap it with another item when dropped. *DOES NOT WORK*
 	private int prevIndex;
+
 
 	void Awake()
 	{
+		//singleton design pattern
 		if(instance == null)
 			instance = this;
 		else if(instance != this)
 			Destroy (gameObject);
 
+		//since player inventory should persist over scenes, this object should not be destroyed on load
 		DontDestroyOnLoad(gameObject);
 	}
 
@@ -34,7 +45,9 @@ public class Inventory : MonoBehaviour {
 	void Start(){
 		for(int i = 0; i < width * height; i++)
 		{
+			//initialize slots with empty items
 			slots.Add (new Item());
+			//initialize an empty inventory
 			inventory.Add (new Item());
 		}
 
@@ -51,6 +64,7 @@ public class Inventory : MonoBehaviour {
 		
 		GUI.skin = skin;
 
+		//pretty straightforward, not much to explain here
 		if(showInventory)
 		{
 			DrawInventory ();
@@ -64,8 +78,7 @@ public class Inventory : MonoBehaviour {
 			DrawDraggingItem();
 		*/
 
-		//displaying current inventory items as text whether if the inventory is open or not.
-		// *for testing purposes*
+		//displaying current inventory items as text whether if the inventory is open or not. *TESTING PURPOSES*
 		for (int i = 0; i < inventory.Count; i++) 
 			GUI.Label (new Rect(10,i * 20,200,50), inventory[i].itemName);
 	}
@@ -75,13 +88,14 @@ public class Inventory : MonoBehaviour {
 		//stores information of current events, so it allows us to capture mouse position and enable drag & drop functionality
 		Event e = Event.current;
 
-		//keeps track of total slots
+		//Since x and y cannot specify where the current slot is at, we need a variable to keep track when iterating through
 		int i = 0;
 
 		for(int y = 0; y < height; y++)
 		{
 			for(int x = 0; x < width; x++)
 			{
+				//position to draw Empty slots and items. This is scaled so to the size of the screen so it is platform independent
 				Rect slotRect = new Rect(Screen.width / 3 + x * Screen.width / 7, Screen.height / 9.6f + y * Screen.height / 10, Screen.width / 8, Screen.height / 12);
 				//draw inventory
 				GUI.Box (slotRect, "", skin.GetStyle ("Slot"));
@@ -91,6 +105,7 @@ public class Inventory : MonoBehaviour {
 				//check if an existing item is assigned to slot
 				if(slots[i].Exist)
 				{
+					//Current item
 					Item item = slots[i];
 					//draw the item
 					GUI.DrawTexture (slotRect, item.itemIcon);
@@ -109,18 +124,17 @@ public class Inventory : MonoBehaviour {
 						if(e.isMouse && e.type == EventType.mouseDown && e.button == 1)
 						{
 							if(item.itemType == Item.ItemType.Weapon)
-							{
 								EquipWeapon(i);
-							}
 
 							if(item.itemType == Item.ItemType.Armor)
-							{
 								EquipArmor(i);
-							}
+
+							if(item.itemType == Item.ItemType.Potion)
+								EquipPotion(i);
 						}
 
 						/**
-						 * drag & drop feature, currently not working. 
+						 * drag & drop feature *CURRENTLY NOT WORKING* 
 						//Check if mouse is clicked on an existing item and it is "dragged"
 						if(e.button ==  0 && e.type == EventType.mouseDrag && !draggingItem)
 						{
@@ -170,7 +184,6 @@ public class Inventory : MonoBehaviour {
 
 	public void AddItem(int id)
 	{
-		print ("1");
 		for(int i = 0; i < inventory.Count; i++)
 		{
 			if(!inventory[i].Exist)
@@ -201,7 +214,7 @@ public class Inventory : MonoBehaviour {
 
 
 	//Check if the inventory contains an item with the corresponding id
-	// *not used yet*
+	// *NOT USED YET*
 	bool Contain(int id)
 	{
 		for(int i = 0; i < inventory.Count; i++)
@@ -219,6 +232,10 @@ public class Inventory : MonoBehaviour {
 	}
 	private void EquipArmor(int i){
 		print ("Armor Euipped");
+		inventory[i] = new Item();
+	}
+	private void EquipPotion(int i){
+		print ("Potion Euipped");
 		inventory[i] = new Item();
 	}
 }
