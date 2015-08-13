@@ -2,36 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Inventory : MonoBehaviour {
-	[System.Serializable]
-	public class Position
-	{
-		public float xCor;
-		public float yCor;
-	}
-	[System.Serializable]
-	public class Spacing
-	{
-		public float width;
-		public float height;
-	}
-	[System.Serializable]
-	public class SlotSize
-	{
-		public float width;
-		public float height;
-	}
-	//position where the inventory is in the game
-	public Position position;
+public class Inventory : PlayerMenu{
 	//spacing between each slot
 	public Spacing spacing;
-	public SlotSize slotsize;
 	//Used for singleton design pattern
 	public static Inventory instance = null;
 	//the grid size of the inventory
 	public int width, height;
-	//Some custom GUI styles for fun
-	public GUISkin skin;
 
 	//contains valid/existing items that the player already have
 	public List<Item> inventory = new List<Item>();
@@ -39,16 +16,6 @@ public class Inventory : MonoBehaviour {
 	public List<Item> slots = new List<Item>();
 	//set to true when inventory button is pressed
 	private bool showInventory;
-	//set to true when an item is pressed in the inventory menu
-	private bool showTooltip;
-	//information to display in the tooltip box
-	private string tooltip;
-
-	//set tot true when a item is currently being dragged. *DOES NOT WORK*
-	private bool draggingItem;
-	//current item that is being dragged. *DOES NOT WORK*
-	private Item draggedItem;
-	//The index where the item is being dragged off of so we can swap it with another item when dropped. *DOES NOT WORK*
 	private int prevIndex;
 
 
@@ -90,7 +57,7 @@ public class Inventory : MonoBehaviour {
 		//pretty straightforward, not much to explain here
 		if(showInventory)
 		{
-			DrawInventory ();
+			Draw ();
 			if(showTooltip)
 				DrawTooltip();
 		}
@@ -100,7 +67,7 @@ public class Inventory : MonoBehaviour {
 		
 	}
 
-	void DrawInventory()
+	void Draw()
 	{
 		//stores information of current events, so it allows us to capture mouse position and enable drag & drop functionality
 		Event e = Event.current;
@@ -145,42 +112,49 @@ public class Inventory : MonoBehaviour {
 							if(item is Comsumable)
 								EquipPotion(item, i);
 						}
-
-			
-						// drag & drop feature *CURRENTLY NOT WORKING* 
+						 
 						//Check if mouse is clicked on an existing item and it is "dragged"
 						if(e.button == 0 && e.type == EventType.mouseDrag && !draggingItem)
-						{
-							draggingItem = true;
-							prevIndex = i;
-							draggedItem = slots[i];
+							Drag (i, item);
 
-							//delete the item by making it an empty item
-							inventory[i] = new Item();
-						}
-
-						//Check if mouse is release while draggging an item
+						//Check if mouse is release while draggging an item on an existing item
 						if(e.type == EventType.mouseUp && draggingItem)
-						{
-							inventory[prevIndex] = inventory[i];
-							inventory[i] = draggedItem;
-							draggingItem = false;
-							draggedItem = null;
-						}
+							DropSwap(i);
+						
 					} 
 				}else 
 				//if dragged item is hovering over an empty slot
 				if(slotRect.Contains(e.mousePosition) && e.type == EventType.mouseUp && draggingItem)
-				{
-					inventory[i] = draggedItem;
-					draggingItem = false;
-					draggedItem = null;
-				}
+						DropAssign (i);
 				i++;
 			}
 		}
 	}
 
+	void Drag(int i, Item item)
+	{
+		draggingItem = true;
+		prevIndex = i;
+		draggedItem = item;
+		
+		//delete the item by making it an empty item
+		inventory[i] = new Item();
+	}
+
+	void DropSwap(int i)
+	{
+		inventory[prevIndex] = inventory[i];
+		inventory[i] = draggedItem;
+		draggingItem = false;
+		draggedItem = null;
+	}
+
+	void DropAssign(int i)
+	{
+		inventory[i] = draggedItem;
+		draggingItem = false;
+		draggedItem = null;
+	}
 
 	void DrawDraggingItem()
 	{
