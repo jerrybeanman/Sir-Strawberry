@@ -34,9 +34,9 @@ public class Inventory : MonoBehaviour {
 	public GUISkin skin;
 
 	//contains valid/existing items that the player already have
-	private List<Item> inventory = new List<Item>();
+	public List<Item> inventory = new List<Item>();
 	//the total number of slots in the inventory, each slot will have a item (if not, Item.Exist is default to false) so we can manipulate with the inventory
-	private List<Item> slots = new List<Item>();
+	public List<Item> slots = new List<Item>();
 	//set to true when inventory button is pressed
 	private bool showInventory;
 	//set to true when an item is pressed in the inventory menu
@@ -101,13 +101,6 @@ public class Inventory : MonoBehaviour {
 		//displaying current inventory items as text whether if the inventory is open or not. *TESTING PURPOSES*
 		for (int i = 0; i < inventory.Count; i++) 
 			GUI.Label (new Rect(10,i * 20,200,50), inventory[i].itemName);
-
-		if (GUI.Button (new Rect (100, 150, 100, 40), "save items")) {
-			Save ();
-		}
-		if (GUI.Button (new Rect (100, 190, 100, 40), "load items")) {
-			Load ();
-		}
 		
 	}
 
@@ -132,8 +125,6 @@ public class Inventory : MonoBehaviour {
 				slots[i] = inventory[i];
 				//Current item
 				Item item = slots[i];
-				Texture2D itemIcon = Resources.Load<Texture2D>("Item Icons/" + item.itemName);
-
 				//check if an existing item is assigned to slot
 				if(item.Exist)
 				{
@@ -207,7 +198,7 @@ public class Inventory : MonoBehaviour {
 	void DrawDraggingItem()
 	{
 		//draw the item texture while dragging at a position 15x, 15y pixels relative to the mouse position
-		GUI.DrawTexture(new Rect(Event.current.mousePosition.x + 15, Event.current.mousePosition.y, 50, 50), draggedItem.itemIcon);
+		GUI.DrawTexture(new Rect(Event.current.mousePosition.x + 15, Event.current.mousePosition.y, 50, 50), Resources.Load<Texture2D>("Item Icons/" + draggedItem.itemName));
 	}
 
 	void DrawTooltip()
@@ -270,19 +261,6 @@ public class Inventory : MonoBehaviour {
 	private void EquipPotion(Item item, int i){
 		print ("Potion Euipped");
 		inventory[i] = new Item();
-	}
-
-	// This is a temporary save function. This can be moved to 'add item to inventory'
-	public void Save() {
-		GameManager.manager.inventory = inventory;
-		GameManager.manager.slots = slots;
-	}
-
-	// This is a temporary load function. This can be moved to 'awake' or start perhaps.
-	public void Load() {
-		inventory = GameManager.manager.inventory;
-		slots = GameManager.manager.slots;
-		showInventory = true;
 	}
 
 

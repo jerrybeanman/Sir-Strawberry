@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour {
 	public static GameManager manager;
 	public float health;
 	public float experience;
-	public List<Item> inventory;
-	public List<Item> slots;
 
 	// Use this for initialization
 	void Awake () {
@@ -50,8 +48,8 @@ public class GameManager : MonoBehaviour {
 		// Transfers our current health and experience over to our new playerdata object.
 		data.health = health;
 		data.experience = experience;
-		data.inventory = inventory;
-		//data.slots = slots;
+		data.inventory = Inventory.instance.inventory;
+		data.slots = Inventory.instance.slots;
 
 		//  Serializes our data to our file.
 		bf.Serialize(file, data);
@@ -71,8 +69,8 @@ public class GameManager : MonoBehaviour {
 			health = data.health;
 			experience = data.experience;
 
-			inventory = data.inventory;
-			slots = data.slots;
+			Inventory.instance.inventory = data.inventory;
+			Inventory.instance.inventory = data.slots;
 		} else {
 			print("You do not have a saved file to load");
 		}
