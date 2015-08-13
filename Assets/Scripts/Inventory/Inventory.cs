@@ -34,9 +34,9 @@ public class Inventory : MonoBehaviour {
 	public GUISkin skin;
 
 	//contains valid/existing items that the player already have
-	private List<Item> inventory = new List<Item>();
+	public List<Item> inventory = new List<Item>();
 	//the total number of slots in the inventory, each slot will have a item (if not, Item.Exist is default to false) so we can manipulate with the inventory
-	private List<Item> slots = new List<Item>();
+	public List<Item> slots = new List<Item>();
 	//set to true when inventory button is pressed
 	private bool showInventory;
 	//set to true when an item is pressed in the inventory menu
@@ -97,6 +97,7 @@ public class Inventory : MonoBehaviour {
 
 		if(draggingItem)
 			DrawDraggingItem();
+		
 	}
 
 	void DrawInventory()
@@ -248,6 +249,8 @@ public class Inventory : MonoBehaviour {
 		print ("Potion Euipped");
 		inventory[i] = new Item();
 	}
+
+
 }
 
 

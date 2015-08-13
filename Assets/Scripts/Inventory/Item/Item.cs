@@ -33,8 +33,6 @@ public class Item {
 		s += "<b><color=#4DA4BF>" +  "Desc:" + "</color></b>" +  itemDesc + "\n";
 		s += "<b><color=teal>" + itemGold.ToString () + "Gold" + "</color></b>\n\n";
 		return s;
-		/*tooltip += "<b><color=#4DA4BF>" +  "HP:" + "</color></b>" + item.itemHp.ToString() + "\n";
-		tooltip += "<b><color=#4DA4BF>" +  "MANA:" + "</color></b>" + item.itemMp.ToString() + "\n";*/
 	}
 
 	public Item(){	}
