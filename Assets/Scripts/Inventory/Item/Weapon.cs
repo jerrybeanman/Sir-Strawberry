@@ -14,6 +14,7 @@ public class Weapon : Item {
 
 	public override string ToString()
 	{
+
 		string s;
 		s = base.ToString ();
 		s += "<b><color=#4DA4BF>" +  "+ATK:" + "</color></b>" + weaponPower.ToString() + "\n";

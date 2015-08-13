@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class BoardManager : MonoBehaviour {
 
+	public LevelReader levelReader;
 	public Transform FloorTop;
 	public Transform FloorTopLeft;
 	public Transform FloorTopRight;
@@ -26,7 +27,6 @@ public class BoardManager : MonoBehaviour {
 	private const string fbl = "1";
 
 	private string[][] level;
-	public LevelReader levelReader;
 
 	private float height;
 	private float width;

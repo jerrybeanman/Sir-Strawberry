@@ -30,10 +30,10 @@ public class GameManager : MonoBehaviour {
 		GUI.Label(new Rect(10,40,100,30), "experience: " + experience);
 
 		// Test save and load buttons.
-		if (GUI.Button (new Rect (100, 10, 100, 40), "Save")) {
+		if (GUI.Button (new Rect (170, 10, 50, 25), "Save")) {
 			Save();
 		}
-		if (GUI.Button (new Rect (100, 50, 100, 40), "Load")) {
+		if (GUI.Button (new Rect (170, 40, 50, 25), "Load")) {
 			Load();
 		}
 	}
