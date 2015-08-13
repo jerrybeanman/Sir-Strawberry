@@ -29,9 +29,9 @@ public class ItemDB : MonoBehaviour {
 	//Can also try reading item informations through a xml file
 	void Start()
 	{
-		items.Add (new Item(0, "Blue Potion", "gives mana banana", 0, 0, 20, Item.ItemType.Potion));
-		items.Add (new Item(1, "Silver Plate", "plate madse of silver", 0, 20, 0, Item.ItemType.Weapon));
-		items.Add (new Item(2, "Dagger", "Daggur muh niggur", 20, 0, 0, Item.ItemType.Weapon));
+		items.Add (new Comsumable(0, "Blue Potion", "gives mana banana", 15, 0, 20));
+		items.Add (new Armor(1, "Silver Plate", "plate madse of silver", 200, 20));
+		items.Add (new Weapon(2, "Dagger", "Daggur muh niggur", 100, 20, 5));
 	}
 
 }

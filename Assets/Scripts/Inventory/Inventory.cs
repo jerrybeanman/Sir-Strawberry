@@ -129,19 +129,19 @@ public class Inventory : MonoBehaviour {
 					//Check if mouse is hovering over an existing item
 					if(slotRect.Contains(e.mousePosition) )//&& Input.GetMouseButtonDown(0))
 					{
-						GenerateTooltip(item);
+						tooltip = item.ToString();
 						showTooltip = true;
 
 						//if mouse is right clicked on the item
 						if(e.isMouse && e.type == EventType.mouseDown && e.button == 1)
 						{
-							if(item.itemType == Item.ItemType.Weapon)
+							if(item is Weapon)
 								EquipWeapon(item, i);
 
-							if(item.itemType == Item.ItemType.Armor)
+							if(item is Armor)
 								EquipArmor(item, i);
 
-							if(item.itemType == Item.ItemType.Potion)
+							if(item is Comsumable)
 								EquipPotion(item, i);
 						}
 
@@ -180,15 +180,6 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
-	//Populate the tool tip string with the corresponding item information
-	void GenerateTooltip(Item item)
-	{
-		tooltip = "<b><color=#4DA4BF>" + item.itemName + "</color></b>\n\n";
-		tooltip += "<b><color=#4DA4BF>" +  "Desc:" + "</color></b>" +  item.itemDesc + "\n\n";
-		tooltip += "<b><color=#4DA4BF>" +  "ATK:" + "</color></b>" + item.itemPower.ToString() + "\n";
-		tooltip += "<b><color=#4DA4BF>" +  "HP:" + "</color></b>" + item.itemHp.ToString() + "\n";
-		tooltip += "<b><color=#4DA4BF>" +  "MANA:" + "</color></b>" + item.itemMp.ToString() + "\n";
-	}
 
 	void DrawDraggingItem()
 	{
