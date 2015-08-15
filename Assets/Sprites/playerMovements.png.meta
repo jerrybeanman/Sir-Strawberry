@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e299d7b6b9dc83c41ab5837704edbd69
-timeCreated: 1439582501
+timeCreated: 1439611794
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -19,6 +19,8 @@ TextureImporter:
     21300024: playerMovements_12
     21300026: playerMovements_13
     21300028: playerMovements_14
+    21300030: playerMovements_15
+    21300032: playerMovements_16
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -67,152 +69,172 @@ TextureImporter:
     - name: playerMovements_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 234
-        width: 40
-        height: 40
+        x: 3
+        y: 236
+        width: 34
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 234
-        width: 40
-        height: 40
+        x: 50
+        y: 236
+        width: 27
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_2
       rect:
         serializedVersion: 2
-        x: 80
-        y: 234
-        width: 40
-        height: 40
+        x: 90
+        y: 236
+        width: 22
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_3
       rect:
         serializedVersion: 2
-        x: 120
-        y: 234
-        width: 40
-        height: 40
+        x: 128
+        y: 236
+        width: 17
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_4
       rect:
         serializedVersion: 2
-        x: 160
-        y: 234
-        width: 40
-        height: 40
+        x: 169
+        y: 236
+        width: 17
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_5
       rect:
         serializedVersion: 2
-        x: 200
-        y: 234
-        width: 40
-        height: 40
+        x: 202
+        y: 236
+        width: 22
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 194
-        width: 40
-        height: 40
+        x: 237
+        y: 236
+        width: 29
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_7
       rect:
         serializedVersion: 2
-        x: 40
-        y: 194
-        width: 40
-        height: 40
+        x: 3
+        y: 196
+        width: 34
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_8
       rect:
         serializedVersion: 2
-        x: 80
-        y: 194
-        width: 40
-        height: 40
+        x: 43
+        y: 196
+        width: 34
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_9
       rect:
         serializedVersion: 2
-        x: 120
-        y: 194
-        width: 40
-        height: 40
+        x: 81
+        y: 197
+        width: 34
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_10
       rect:
         serializedVersion: 2
-        x: 160
-        y: 194
-        width: 40
-        height: 40
+        x: 120
+        y: 196
+        width: 34
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_11
       rect:
         serializedVersion: 2
-        x: 200
-        y: 194
-        width: 40
-        height: 40
+        x: 160
+        y: 196
+        width: 34
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 154
-        width: 40
-        height: 40
+        x: 199
+        y: 197
+        width: 34
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_13
       rect:
         serializedVersion: 2
-        x: 40
-        y: 154
-        width: 40
-        height: 40
+        x: 244
+        y: 197
+        width: 22
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerMovements_14
       rect:
         serializedVersion: 2
-        x: 77
-        y: 152
-        width: 40
-        height: 40
+        x: 11
+        y: 158
+        width: 22
+        height: 37
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: playerMovements_15
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 158
+        width: 34
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: playerMovements_16
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 157
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

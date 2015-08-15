@@ -80,8 +80,20 @@ public class Player : MovingObject
 		*/
 
 		if(horizontal == 0 && vertical == 0) {
-			if(!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdleForward")) {
-				animator.SetTrigger("playerIdle");
+			//if(!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdleForward")) {
+			//	animator.SetTrigger("playerIdle");
+			//}
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveRight")) {
+				animator.SetTrigger("playerRightIdle");
+			}
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveLeft")) {
+				animator.SetTrigger("playerLeftIdle");
+			}
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveUp")) {
+				animator.SetTrigger("playerUpIdle");
+			}
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveDown")) {
+				animator.SetTrigger("playerDownIdle");
 			}
 		} 
 		if(horizontal == 1) {
@@ -96,12 +108,12 @@ public class Player : MovingObject
 		}
 		if(vertical == 1) {
 			if(!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveForward")) {
-				animator.SetTrigger("playerForward");
+				animator.SetTrigger("playerUp");
 			}
 		}
 		if(vertical == -1) {
 			if(!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveBack")) {
-				animator.SetTrigger("playerBack");
+				animator.SetTrigger("playerDown");
 			}
 		}
 		#endif
@@ -148,9 +160,6 @@ public class Player : MovingObject
 		
 		#endif 
 		//End of mobile platform dependendent compilation section started above with #elif
-
-
-
 
 		
 		//Check if we have a non-zero value for horizontal or vertical
