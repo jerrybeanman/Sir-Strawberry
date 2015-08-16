@@ -115,16 +115,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position:
-    xCor: 0
-    yCor: 0
+    xCor: 1.79999995
+    yCor: 6
   spacing:
-    width: 0
-    height: 0
+    width: 7
+    height: 10
   slotsize:
-    width: 0
-    height: 0
-  width: 4
-  height: 5
+    width: 8
+    height: 12
+  width: 3
+  height: 3
   skin: {fileID: 11400000, guid: a7ae303ddfbca6243ad937b0bf1a18ef, type: 2}
   inventory: []
   slots: []
@@ -478,6 +478,48 @@ MonoScript:
   m_Namespace: UnityEngine.UI
   m_AssemblyName: UnityEngine.UI.dll
   m_IsEditorScript: 0
+--- !u!1 &811550607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 189582, guid: b40326ad8b78d4a43bb526706f55ccc9, type: 2}
+  m_PrefabInternal: {fileID: 1935672387}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 811550609}
+  - 114: {fileID: 811550608}
+  m_Layer: 0
+  m_Name: TestingGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &811550608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11402992, guid: b40326ad8b78d4a43bb526706f55ccc9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1935672387}
+  m_GameObject: {fileID: 811550607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb91647049c19b418b2a4d0affd5df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  experience: 0
+--- !u!4 &811550609
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 415974, guid: b40326ad8b78d4a43bb526706f55ccc9, type: 2}
+  m_PrefabInternal: {fileID: 1935672387}
+  m_GameObject: {fileID: 811550607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!1 &828586157
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,48 +978,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1152895052}
---- !u!1 &1184094256
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 189582, guid: b40326ad8b78d4a43bb526706f55ccc9, type: 2}
-  m_PrefabInternal: {fileID: 1935672387}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1184094258}
-  - 114: {fileID: 1184094257}
-  m_Layer: 0
-  m_Name: TestingGameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1184094257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11402992, guid: b40326ad8b78d4a43bb526706f55ccc9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1935672387}
-  m_GameObject: {fileID: 1184094256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fb91647049c19b418b2a4d0affd5df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  experience: 0
---- !u!4 &1184094258
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 415974, guid: b40326ad8b78d4a43bb526706f55ccc9, type: 2}
-  m_PrefabInternal: {fileID: 1935672387}
-  m_GameObject: {fileID: 1184094256}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
 --- !u!1 &1449955799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,7 +1513,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b40326ad8b78d4a43bb526706f55ccc9, type: 2}
-  m_RootGameObject: {fileID: 1184094256}
+  m_RootGameObject: {fileID: 811550607}
   m_IsPrefabParent: 0
 --- !u!1 &2114790665
 GameObject:

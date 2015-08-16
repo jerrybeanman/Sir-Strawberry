@@ -14,8 +14,6 @@ public class Inventory : PlayerMenu{
 	public List<Item> inventory = new List<Item>();
 	//the total number of slots in the inventory, each slot will have a item (if not, Item.Exist is default to false) so we can manipulate with the inventory
 	public List<Item> slots = new List<Item>();
-	//set to true when inventory button is pressed
-	private bool showInventory;
 	private int prevIndex;
 
 
@@ -42,32 +40,11 @@ public class Inventory : PlayerMenu{
 		}
 
 	}
-
-	public void setShowInventory()
-	{
-		showInventory = !showInventory;
-	}
-
 	
-	void OnGUI()
-	{
-		
-		GUI.skin = skin;
 
-		//pretty straightforward, not much to explain here
-		if(showInventory)
-		{
-			Draw ();
-			if(showTooltip)
-				DrawTooltip();
-		}
 
-		if(draggingItem)
-			DrawDraggingItem();
-		
-	}
 
-	void Draw()
+	protected override void Draw()
 	{
 		//stores information of current events, so it allows us to capture mouse position and enable drag & drop functionality
 		Event e = Event.current;
@@ -75,12 +52,20 @@ public class Inventory : PlayerMenu{
 		//Since x and y cannot specify where the current slot is at, we need a variable to keep track when iterating through
 		int i = 0;
 
+	Rect backGround = new Rect (Screen.width / position.xCor - Screen.width / spacing.width + Screen.width / slotsize.width, 
+		                        Screen.height / position.yCor - Screen.height / spacing.height + Screen.height / slotsize.height, 
+		                        Screen.width / slotsize.width * width + Screen.width / slotsize.width, 
+		                        Screen.height / slotsize.height * height + Screen.height / slotsize.width);
+		GUI.Box (backGround, "", skin.GetStyle ("Inventory"));
 		for(int y = 0; y < height; y++)
 		{
 			for(int x = 0; x < width; x++)
 			{
 				//position to draw Empty slots and items. This is scaled so to the size of the screen so it is platform independent
-				Rect slotRect = new Rect(Screen.width / position.xCor + x * Screen.width / spacing.width, Screen.height / position.yCor + y * Screen.height / spacing.height, Screen.width / slotsize.width, Screen.height / slotsize.height);
+				Rect slotRect = new Rect(Screen.width / position.xCor + x * Screen.width / spacing.width, 
+				                         Screen.height / position.yCor + y * Screen.width / spacing.height, 
+				                         Screen.width / slotsize.width, 
+				                         Screen.height / slotsize.height);
 				//draw inventory
 				GUI.Box (slotRect, "", skin.GetStyle ("Slot"));
 
@@ -131,7 +116,7 @@ public class Inventory : PlayerMenu{
 		}
 	}
 
-	void Drag(int i, Item item)
+	protected override void Drag(int i, Item item)
 	{
 		draggingItem = true;
 		prevIndex = i;
@@ -141,7 +126,7 @@ public class Inventory : PlayerMenu{
 		inventory[i] = new Item();
 	}
 
-	void DropSwap(int i)
+	protected override void DropSwap(int i)
 	{
 		inventory[prevIndex] = inventory[i];
 		inventory[i] = draggedItem;
@@ -149,25 +134,15 @@ public class Inventory : PlayerMenu{
 		draggedItem = null;
 	}
 
-	void DropAssign(int i)
+	protected override void DropAssign(int i)
 	{
 		inventory[i] = draggedItem;
 		draggingItem = false;
 		draggedItem = null;
 	}
+	
 
-	void DrawDraggingItem()
-	{
-		//draw the item texture while dragging at a position 15x, 15y pixels relative to the mouse position
-		GUI.DrawTexture(new Rect(Event.current.mousePosition.x + 15, Event.current.mousePosition.y, 50, 50), Resources.Load<Texture2D>("Item Icons/" + draggedItem.itemName));
-	}
-
-	void DrawTooltip()
-	{
-		GUI.Box (new Rect(Screen.width / 2.5f, Screen.height / 1.65f, Screen.width / 1.75f, Screen.height / 3.75f), tooltip, skin.GetStyle("Tooltip"));
-	}
-
-	public void AddItem(int id)
+	public override void AddItem(int id)
 	{
 		for(int i = 0; i < inventory.Count; i++)
 		{
@@ -183,7 +158,7 @@ public class Inventory : PlayerMenu{
 		}
 	}
 
-	void RemoveItem(int id)
+	protected override void RemoveItem(int id)
 	{
 		for(int i = 0; i < inventory.Count; i++)
 		{
