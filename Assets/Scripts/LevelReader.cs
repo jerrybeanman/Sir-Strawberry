@@ -15,10 +15,6 @@ public class LevelReader : MonoBehaviour {
 	
 	// Use this for initialization
 	void Awake () {
-		//string[] currentSceneName = Regex.Split(Application.loadedLevelName, @"\D+");
-		//Difficulty = currentSceneName [1];
-		//Map = currentSceneName [2];
-		//string fileName =  "difficulty" + Difficulty + "-map" + Map;
 		TextAsset text = (TextAsset)Resources.Load ("level1", typeof(TextAsset));				//Load the file from the Resources folder
 
 		Level = readFile (text);		//Read the text file and assign back into two dimensional array
