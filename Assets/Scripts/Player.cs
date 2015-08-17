@@ -47,6 +47,11 @@ public class Player : MovingObject
 	
 	private void Update ()
 	{
+		int up = 0;
+		int down = 0;
+		int left = 0;
+		int right = 0;
+
 		if (isMoving) {
 			return;
 		}
@@ -68,12 +73,52 @@ public class Player : MovingObject
 		if (horizontal != 0) {
 			vertical = 0;
 		}
+		/*
 		if (vertical != 0) {
 			horizontal = 0;
 		}
+		*/
 
+		if(horizontal == 0 && vertical == 0) {
+			//if(!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdleForward")) {
+			//	animator.SetTrigger("playerIdle");
+			//}
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveRight")) {
+				animator.SetTrigger("playerRightIdle");
+			}
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveLeft")) {
+				animator.SetTrigger("playerLeftIdle");
+			}
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveUp")) {
+				animator.SetTrigger("playerUpIdle");
+			}
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveDown")) {
+				animator.SetTrigger("playerDownIdle");
+			}
+		} 
+		if(horizontal == 1) {
+			if(!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveRight")) {
+				animator.SetTrigger("playerRight");
+			}
+		}
+		if(horizontal == -1) {
+			if(!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveLeft")) {
+				animator.SetTrigger("playerLeft");
+			}
+		}
+		if(vertical == 1) {
+			if(!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveForward")) {
+				animator.SetTrigger("playerUp");
+			}
+		}
+		if(vertical == -1) {
+			if(!animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerMoveBack")) {
+				animator.SetTrigger("playerDown");
+			}
+		}
+		#endif
 
-		#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+		#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
 		//Check if Input has registered more than zero touches
 		if (Input.touchCount > 0)
@@ -116,15 +161,12 @@ public class Player : MovingObject
 		#endif 
 		//End of mobile platform dependendent compilation section started above with #elif
 
-
-
-
 		
 		//Check if we have a non-zero value for horizontal or vertical
 		if (horizontal != 0 || vertical != 0) {
 			//Call AttemptMove passing in the generic parameter Wall, since that is what Player may interact with if they encounter one (by attacking it)
 			//Pass in horizontal and vertical as parameters to specify the direction to move Player in.
-			AttemptMove<Wall> (horizontal, vertical);
+			AttemptMove<TestImoveable> (horizontal, vertical);
 		}
 		
 		StartCoroutine (WaitForMovement ());
