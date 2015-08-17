@@ -15,6 +15,6 @@ public class Test : MonoBehaviour {
 	
 	public void ShowInventory()
 	{
-		Inventory.instance.setShowInventory();
+		Inventory.instance.setShowPlayerMenu();
 	}
 }
