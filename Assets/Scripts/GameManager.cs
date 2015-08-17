@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
 	public static GameManager manager;
 	public float health;
 	public float experience;
+	public bool playersTurn = true;
+	public bool wait = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -21,7 +23,6 @@ public class GameManager : MonoBehaviour {
 		} else if (manager != this) {
 			Destroy(gameObject);
 		}
-
 	}
 	
 	void OnGUI() {
@@ -37,6 +38,23 @@ public class GameManager : MonoBehaviour {
 			Load();
 		}
 	}
+
+	private void Update() {
+		// If player is moving, or wait bool is toggled, do nothing
+		if (playersTurn || wait) {
+			return;
+		}
+		// If we are not waiting, and it is not players turn, wait .1 seconds
+		StartCoroutine(WaitForMovement());
+	}
+
+	IEnumerator WaitForMovement() {
+		wait = true;
+		yield return new WaitForSeconds (.1f);
+		playersTurn = true;
+		wait = false;
+	}
+
 
 	public void Save() {
 		BinaryFormatter bf = new BinaryFormatter();

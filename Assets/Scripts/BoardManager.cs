@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 
 public class BoardManager : MonoBehaviour {
-
-	public LevelReader levelReader;
 	public Transform FloorTop;
 	public Transform FloorTopLeft;
 	public Transform FloorTopRight;
@@ -26,27 +24,25 @@ public class BoardManager : MonoBehaviour {
 	private const string fbr = "3";
 	private const string fbl = "1";
 
-	private string[][] level;
-
 	private float height;
 	private float width;
 
 
 	void Awake() {
-		level = levelReader.getLevel();
+		LevelReader.instance.setLevel();
 	}
 
 	// Use this for initialization
 	void Start () {
-		height = level.Length;
-		width = level [0].Length;
+		height = LevelReader.instance.Level.Length;
+		width = LevelReader.instance.Level[0].Length;
 		createLevel ();
 	}
 
 	void createLevel() {
 		for (int z = 0; z < height; z++) {
 			for (int x = 0; x < width; x++) {
-				switch (level [z] [x]) {
+				switch (LevelReader.instance.Level[z] [x]) {
 				case ft:
 					Instantiate (FloorTop, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
