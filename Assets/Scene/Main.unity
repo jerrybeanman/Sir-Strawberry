@@ -534,6 +534,13 @@ MonoBehaviour:
   slotsize:
     width: 7.5
     height: 11.75
+  TooltipValues:
+    position:
+      xCor: 2.5
+      yCor: 1.64999998
+    slotsize:
+      width: 1.75
+      height: 3.75
   current: []
   slots: []
   skin: {fileID: 11400000, guid: a7ae303ddfbca6243ad937b0bf1a18ef, type: 2}
@@ -1518,7 +1525,7 @@ GameObject:
   - 4: {fileID: 1823741762}
   - 114: {fileID: 1823741763}
   m_Layer: 0
-  m_Name: InventoryObjectHolder
+  m_Name: PlayerMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1670,6 +1677,13 @@ MonoBehaviour:
   slotsize:
     width: 7.5
     height: 11.75
+  TooltipValues:
+    position:
+      xCor: 0
+      yCor: 0
+    slotsize:
+      width: 0
+      height: 0
   current: []
   slots: []
   skin: {fileID: 11400000, guid: a7ae303ddfbca6243ad937b0bf1a18ef, type: 2}

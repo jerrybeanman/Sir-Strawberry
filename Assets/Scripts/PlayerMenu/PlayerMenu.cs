@@ -8,6 +8,8 @@ public abstract class PlayerMenu : MonoBehaviour {
 	public class Spacing	{	public float width, height;	}
 	[System.Serializable]
 	public class SlotSize	{	public float width, height;	}
+	[System.Serializable]
+	public class ToolTip 	{	public Position position; 	public SlotSize slotsize;}
 
 	public float BackGroundYCor;
 	public float BackGroundHeight;
@@ -15,7 +17,9 @@ public abstract class PlayerMenu : MonoBehaviour {
 	public Position position;
 	//spacing between each slot
 	public Spacing spacing;
+	//size of each slot
 	public SlotSize slotsize;
+	public ToolTip TooltipValues;
 
 	//contains valid/existing items that the player already have
 	[HideInInspector]public List<Item> current = new List<Item>();
@@ -147,7 +151,10 @@ public abstract class PlayerMenu : MonoBehaviour {
 	
 	protected void DrawTooltip()
 	{
-		GUI.Box (new Rect(Screen.width / 2.5f, Screen.height / 1.65f, Screen.width / 1.75f, Screen.height / 3.75f), tooltip, skin.GetStyle("Tooltip"));
+		GUI.Box (new Rect(Screen.width / TooltipValues.position.xCor, 
+		                  Screen.height / TooltipValues.position.yCor, 
+		                  Screen.width / TooltipValues.slotsize.width, 
+		                  Screen.height / TooltipValues.slotsize.height), tooltip, skin.GetStyle("Tooltip"));
 	}
 
 	public virtual void Drag(int i, Item item)
