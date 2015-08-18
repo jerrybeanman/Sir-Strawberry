@@ -40,7 +40,6 @@ public class LevelReader : MonoBehaviour {
 
 	public void setLevel() {
 		TextAsset text = (TextAsset)Resources.Load ("level1", typeof(TextAsset));				//Load the file from the Resources folder
-		
 		Level = readFile (text);		//Read the text file and assign back into two dimensional array
 	}
 	
