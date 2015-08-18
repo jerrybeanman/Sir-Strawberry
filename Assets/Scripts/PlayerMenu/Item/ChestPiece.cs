@@ -2,6 +2,10 @@
 using System.Collections;
 
 public class ChestPiece : Armor {
+	public override string Type
+	{
+		get { return "ChestPiece"; }
+	}
 	public ChestPiece()
 	{
 	}

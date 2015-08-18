@@ -16,5 +16,6 @@ public class Test : MonoBehaviour {
 	public void ShowInventory()
 	{
 		Inventory.instance.setShowPlayerMenu();
+		Armory.instance.setShowPlayerMenu ();
 	}
 }

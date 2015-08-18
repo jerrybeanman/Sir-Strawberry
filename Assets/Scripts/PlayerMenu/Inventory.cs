@@ -27,8 +27,8 @@ public class Inventory : PlayerMenu{
 			//initialize an empty inventory
 			current.Add (new Item());
 		}
-
 	}
+	
 
 
 }

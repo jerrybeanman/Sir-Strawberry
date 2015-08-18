@@ -30,7 +30,7 @@ public class ItemDB : MonoBehaviour {
 	void Start()
 	{
 		items.Add (new Comsumable(0, "Blue Potion", "gives mana banana", 15, 0, 20));
-		items.Add (new Armor(1, "Silver Plate", "plate madse of silver", 200, 20));
+		items.Add (new ChestPiece(1, "Silver Plate", "plate madse of silver", 200, 20));
 		items.Add (new Weapon(2, "Dagger", "Daggur muh niggur", 100, 20, 5));
 	}
 

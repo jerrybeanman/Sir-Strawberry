@@ -5,6 +5,10 @@ public class Armor : Item {
 
 	public int armorHp;
 
+	public override string Type
+	{
+		get { return "Armor"; }
+	}
 	public Armor()
 	{
 	
