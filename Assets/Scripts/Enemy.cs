@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Enemy : MovingObject {
 
-	private Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
-	private Transform target;                           //Transform to attempt to move toward each turn.
+	protected Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
+	protected Transform target;                           //Transform to attempt to move toward each turn.
 
 	void Awake() {
 
@@ -29,31 +29,23 @@ public class Enemy : MovingObject {
 	//See comments in MovingObject for more on how base AttemptMove function works.
 	protected override void AttemptMove <T> (int xDir, int yDir)
 	{
-		/*
-		//Check if skipMove is true, if so set it to false and skip this turn.
-		if(skipMove)
-		{
-			skipMove = false;
-			return;
-			
-		}
-		*/
 		//Call the AttemptMove function from MovingObject.
 		base.AttemptMove <T> (xDir, yDir);
-		
-		//Now that Enemy has moved, set skipMove to true to skip next move.
-		//skipMove = true;
 	}
 
 	//MoveEnemy is called by the GameManger each turn to tell each Enemy to try to move towards the player.
 	public void MoveEnemy ()
 	{
+		// This random number determines which direction our enemies will move in.
+		// There are four possible numbers generated (0, 1, 2, 3) and thus four directions the enemy may move
 		int ran = Random.Range (0, 4);
 		//Declare variables for X and Y axis move directions, these range from -1 to 1.
 		//These values allow us to choose between the cardinal directions: up, down, left and right.
 		int xDir = 0;
 		int yDir = 0;
 
+		// These statements determine the enemy movement direction.
+		// This is very basic and will need to be changed.
 		if (ran == 0) {
 			xDir = 1;
 		}
@@ -89,11 +81,8 @@ public class Enemy : MovingObject {
 		//Declare hitPlayer and set it to equal the encountered component.
 		Player hitPlayer = component as Player;
 
-		// Simulate the enemy hitting the player
+		// Testing variable. Eventually this would be player hit points.
 		GameManager.manager.experience++;
-
-		//Call the LoseFood function of hitPlayer passing it playerDamage, the amount of foodpoints to be subtracted.
-		//hitPlayer.LoseFood (playerDamage);
 		
 		//Set the attack trigger of animator to trigger Enemy attack animation.
 		//animator.SetTrigger ("enemyAttack");

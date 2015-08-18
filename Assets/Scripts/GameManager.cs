@@ -8,14 +8,22 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager manager;
+	// Health is a testing variable
 	public float health;
+	// Experience is a testing variable
 	public float experience;
+	// playersTurn determines when the user can input movements
 	public bool playersTurn = true;
+	// wait ensures that the game waits before allowing the player to move again
 	public bool wait = false;
+	// enemiesMoving ensures that enemies wait enemyWaitTime time before moving again
 	public bool enemiesMoving = false;
-
+	// This is the time the enemies have to wait before executing another move
+	public float enemyWaitTime = 1f;
+	// This is the time the player has to wait before executing another move
+	public float playerWaitTime = .2f;
+	// List of enemy units. This is populated when an enemy is instantiated.
 	public List<Enemy> enemies;							//List of all Enemy units, used to issue them move commands.
-	//private Enemy enemy;
 
 	// Use this for initialization
 	void Awake () {
@@ -27,12 +35,9 @@ public class GameManager : MonoBehaviour {
 		} else if (manager != this) {
 			Destroy(gameObject);
 		}
-
-		//enemy = GameObject.Find ("TestEnemy").GetComponent<Enemy>();
-		// create test enemy
-		//Instantiate (enemy, new Vector3 (1, -4, 0f), Quaternion.identity);
 	}
-	
+
+	// This creates test buttons to prove architecture.
 	void OnGUI() {
 		// Display health and experience on the screen.
 		GUI.Label(new Rect(10,10,100,30), "health: " + health);
@@ -48,42 +53,44 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void Update() {
-		// Enemies moving
-		if (!enemiesMoving && playersTurn) {
+		// This logic is working but needs additional checks to prevent the player and enemy from ending up on the same tile and 'freezing'
+		// If enemiesMoving is false, enter coroutine and start moving enemies
+		if (!enemiesMoving) {
 			StartCoroutine(WaitForEnemyMovement());
 		}
 
-		// If player is moving, or wait bool is toggled, do nothing
+		// If player is moving, or wait bool is toggled, return and do not allow player inputs
 		if (playersTurn || wait) {
 			return;
 		}
-		// If we are not waiting, and it is not players turn, wait .1 seconds
+		// If we are not waiting, and it is not players turn, wait (playerWaitTime) time
 		StartCoroutine(WaitForPlayerMovement());
 	}
 
 	// Waits for the players movement to complete before accepting more input
 	IEnumerator WaitForPlayerMovement() {
 		wait = true;
-		yield return new WaitForSeconds (.1f);
+		yield return new WaitForSeconds (playerWaitTime);
 		playersTurn = true;
 		wait = false;
 	}
 
-	// Allows the enemy to move once per time period
+	// Allows each enemy to move once per time period
 	IEnumerator WaitForEnemyMovement() {
 		enemiesMoving = true;
 		EnemyMovement ();
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (enemyWaitTime);
 		enemiesMoving = false;
 	}
 
+	// Moves each enemy in the enemies list
 	public void EnemyMovement() {
 		foreach (Enemy en in enemies) {
 			en.MoveEnemy();
 		}
 	}
 
-
+	// Saves certain information to disk
 	public void Save() {
 		BinaryFormatter bf = new BinaryFormatter();
 		// This data path is for testing ONLY. Modify path if used on a different machine.
@@ -103,6 +110,7 @@ public class GameManager : MonoBehaviour {
 		print ("file saved");
 	}
 
+	// Loads certain information from disk
 	public void Load() {
 		string filePath = Application.persistentDataPath + "playerInfor.dat";
 		// Again, path needs to be changed if used on a different machine.

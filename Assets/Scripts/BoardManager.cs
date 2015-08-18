@@ -16,6 +16,7 @@ public class BoardManager : MonoBehaviour {
 	public Transform FloorBottomRight;
 	public Transform FloorBottomLeft;
 	public Transform TestEnemy;
+	public Transform TestTurtle;
 
 	private const string ft = "8";
 	private const string ftl = "7";
@@ -27,11 +28,10 @@ public class BoardManager : MonoBehaviour {
 	private const string fbr = "3";
 	private const string fbl = "1";
 	private const string enemy = "e";
+	private const string turtle = "t";
 
 	private float height;
 	private float width;
-
-	public List<Enemy> enemies;
 
 
 	void Awake() {
@@ -78,6 +78,10 @@ public class BoardManager : MonoBehaviour {
 					break;
 				case enemy:
 					Instantiate(TestEnemy, new Vector3(x, -z, 0f), Quaternion.identity);
+					Instantiate (FloorMiddle, new Vector3 (x, -z, 0f), Quaternion.identity);
+					break;
+				case turtle:
+					Instantiate(TestTurtle, new Vector3(x, -z, 0f), Quaternion.identity);
 					Instantiate (FloorMiddle, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				}

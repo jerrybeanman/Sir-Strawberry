@@ -1505,6 +1505,10 @@ Prefab:
       propertyPath: TestEnemy
       value: 
       objectReference: {fileID: 418688, guid: c43f09858246ed54396c5ec61730ceea, type: 2}
+    - target: {fileID: 11478856, guid: 37c436930fe3ebd4e84067e76ba3b3d3, type: 2}
+      propertyPath: TestTurtle
+      value: 
+      objectReference: {fileID: 460406, guid: c8496cd71349ccb49bed768e0e7453b0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37c436930fe3ebd4e84067e76ba3b3d3, type: 2}
   m_IsPrefabParent: 0
