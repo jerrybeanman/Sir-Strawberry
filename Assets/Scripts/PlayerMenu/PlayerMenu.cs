@@ -152,12 +152,13 @@ public abstract class PlayerMenu : MonoBehaviour {
 
 	public virtual void Drag(int i, Item item)
 	{
+		ItemFactory factory = new ItemFactory();
 		draggingItem = true;
 		prevIndex = i;
 		draggedItem = item;
 		
 		//delete the item by making it an empty item
-		current[i] = new Item();
+		current [i] = factory.CreateItem (current [i].Type);
 	}
 	
 	public virtual void DropSwap(int i)

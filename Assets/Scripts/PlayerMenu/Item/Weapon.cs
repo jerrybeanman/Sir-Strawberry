@@ -5,7 +5,10 @@ public class Weapon : Item {
 
 	public int weaponPower;
 	public int weaponSpeed;
-
+	public override string Type
+	{
+		get { return "Weapon"; }
+	}
 	public Weapon()
 	{
 

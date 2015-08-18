@@ -8,6 +8,10 @@ public class Item {
 	public string itemDesc;
 	public int itemGold;
 
+	public virtual string Type
+	{
+		get { return "Item"; }
+	}
 	//This bool shows wether if the current within the player's inventory 
 	private bool exist = false;
 	public bool Exist
