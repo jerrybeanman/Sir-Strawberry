@@ -4,7 +4,11 @@ using System.Collections;
 public class Armor : Item {
 
 	public int armorHp;
+
+	public Armor()
+	{
 	
+	}
 	public Armor(int id, string name, string desc, int gold, int hp) : base(id, name, desc, gold)
 	{
 		armorHp = hp;

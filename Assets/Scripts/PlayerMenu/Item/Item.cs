@@ -17,7 +17,7 @@ public class Item {
 			return exist;
 		}
 	}
-
+	
 	public Item(int id, string name, string desc, int gold)
 	{
 		itemName = name;

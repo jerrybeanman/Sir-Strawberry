@@ -6,6 +6,10 @@ public class Weapon : Item {
 	public int weaponPower;
 	public int weaponSpeed;
 
+	public Weapon()
+	{
+
+	}
 	public Weapon(int id, string name, string desc, int gold, int power, int speed) : base(id, name, desc, gold)
 	{
 		weaponPower = power;

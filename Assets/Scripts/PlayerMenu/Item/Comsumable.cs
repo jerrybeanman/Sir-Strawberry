@@ -5,7 +5,9 @@ public class Comsumable : Item {
 
 	public int comHp;
 	public int comMp;
-	
+
+	public Comsumable()
+	{}
 	public Comsumable(int id, string name, string desc, int gold, int hp, int mp) : base(id, name, desc, gold)
 	{
 		comHp = hp;

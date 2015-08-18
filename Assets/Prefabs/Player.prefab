@@ -12,6 +12,7 @@ GameObject:
   - 61: {fileID: 6166372}
   - 50: {fileID: 5035662}
   - 95: {fileID: 9549104}
+  - 114: {fileID: 11417560}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -69,7 +70,7 @@ Animator:
   m_GameObject: {fileID: 106644}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ffcef9667c9b71c49acd37b95a41bbe4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 99951e02754bf2b4dad7f351f775c3d5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -77,6 +78,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11417560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6debc0e7fa0eb42abd5eb6b10b8297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTime: .100000001
+  blockingLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  restartLevelDelay: 1
 --- !u!212 &21284614
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -109,7 +126,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 99951e02754bf2b4dad7f351f775c3d5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106644}

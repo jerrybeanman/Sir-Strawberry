@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour {
 		// Transfers our current health and experience over to our new playerdata object.
 		data.health = health;
 		data.experience = experience;
-		data.inventory = Inventory.instance.inventory;
+		data.inventory = Inventory.instance.current;
 		data.slots = Inventory.instance.slots;
 
 		//  Serializes our data to our file.
@@ -88,8 +88,8 @@ public class GameManager : MonoBehaviour {
 			health = data.health;
 			experience = data.experience;
 
-			Inventory.instance.inventory = data.inventory;
-			Inventory.instance.inventory = data.slots;
+			Inventory.instance.current = data.inventory;
+			Inventory.instance.slots = data.slots;
 		} else {
 			print("You do not have a saved file to load");
 		}

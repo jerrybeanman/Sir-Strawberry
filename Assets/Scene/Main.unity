@@ -377,7 +377,7 @@ MonoBehaviour:
   moveTime: .100000001
   blockingLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   restartLevelDelay: 1
 --- !u!1 &457764780
 GameObject:
@@ -543,20 +543,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec69c612bd91f7e40a6bedde20ed5aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackGroundYCor: 3.5
+  BackGroundHeight: 1.64999998
   position:
     xCor: 1.79999995
-    yCor: 4.5
-  slotsize:
-    width: 8.75
-    height: 12
-  skin: {fileID: 11400000, guid: a7ae303ddfbca6243ad937b0bf1a18ef, type: 2}
+    yCor: 3.5
   spacing:
+    width: 6.75
+    height: 6.4000001
+  slotsize:
     width: 7.5
-    height: 7.5
+    height: 11.75
+  current: []
+  slots: []
+  skin: {fileID: 11400000, guid: a7ae303ddfbca6243ad937b0bf1a18ef, type: 2}
   width: 3
   height: 3
-  inventory: []
-  slots: []
 --- !u!4 &536485089
 Transform:
   m_ObjectHideFlags: 0
@@ -1093,7 +1095,7 @@ MonoBehaviour:
   interpVelocity: 0
   minDistance: 0
   followDistance: 0
-  target: {fileID: 336902159}
+  target: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
 --- !u!114 &1560981108
 MonoBehaviour:
