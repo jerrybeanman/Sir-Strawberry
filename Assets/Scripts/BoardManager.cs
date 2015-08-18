@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 
 public class BoardManager : MonoBehaviour {
+
+	public static BoardManager instance = null;
 	public Transform FloorTop;
 	public Transform FloorTopLeft;
 	public Transform FloorTopRight;
@@ -13,6 +15,7 @@ public class BoardManager : MonoBehaviour {
 	public Transform FloorBottom;
 	public Transform FloorBottomRight;
 	public Transform FloorBottomLeft;
+	public Transform TestEnemy;
 
 	private const string ft = "8";
 	private const string ftl = "7";
@@ -23,9 +26,12 @@ public class BoardManager : MonoBehaviour {
 	private const string fb = "2";
 	private const string fbr = "3";
 	private const string fbl = "1";
+	private const string enemy = "e";
 
 	private float height;
 	private float width;
+
+	public List<Enemy> enemies;
 
 
 	void Awake() {
@@ -69,6 +75,10 @@ public class BoardManager : MonoBehaviour {
 					break;
 				case fbl:
 					Instantiate (FloorBottomLeft, new Vector3 (x, -z, 0f), Quaternion.identity);
+					break;
+				case enemy:
+					Instantiate(TestEnemy, new Vector3(x, -z, 0f), Quaternion.identity);
+					Instantiate (FloorMiddle, new Vector3 (x, -z, 0f), Quaternion.identity);
 					break;
 				}
 			}

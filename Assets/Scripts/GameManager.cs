@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour {
 	public float experience;
 	public bool playersTurn = true;
 	public bool wait = false;
+	public bool enemiesMoving = false;
+
+	public List<Enemy> enemies;							//List of all Enemy units, used to issue them move commands.
+	//private Enemy enemy;
 
 	// Use this for initialization
 	void Awake () {
@@ -23,6 +27,10 @@ public class GameManager : MonoBehaviour {
 		} else if (manager != this) {
 			Destroy(gameObject);
 		}
+
+		//enemy = GameObject.Find ("TestEnemy").GetComponent<Enemy>();
+		// create test enemy
+		//Instantiate (enemy, new Vector3 (1, -4, 0f), Quaternion.identity);
 	}
 	
 	void OnGUI() {
@@ -40,19 +48,39 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void Update() {
+		// Enemies moving
+		if (!enemiesMoving && playersTurn) {
+			StartCoroutine(WaitForEnemyMovement());
+		}
+
 		// If player is moving, or wait bool is toggled, do nothing
 		if (playersTurn || wait) {
 			return;
 		}
 		// If we are not waiting, and it is not players turn, wait .1 seconds
-		StartCoroutine(WaitForMovement());
+		StartCoroutine(WaitForPlayerMovement());
 	}
 
-	IEnumerator WaitForMovement() {
+	// Waits for the players movement to complete before accepting more input
+	IEnumerator WaitForPlayerMovement() {
 		wait = true;
 		yield return new WaitForSeconds (.1f);
 		playersTurn = true;
 		wait = false;
+	}
+
+	// Allows the enemy to move once per time period
+	IEnumerator WaitForEnemyMovement() {
+		enemiesMoving = true;
+		EnemyMovement ();
+		yield return new WaitForSeconds (1f);
+		enemiesMoving = false;
+	}
+
+	public void EnemyMovement() {
+		foreach (Enemy en in enemies) {
+			en.MoveEnemy();
+		}
 	}
 
 

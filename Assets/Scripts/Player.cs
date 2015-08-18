@@ -15,7 +15,6 @@ public class Player : MovingObject
 	private int health;
 	private Vector3 position;
 	//private Transform transform;
-	private bool isMoving = false;
 	private Vector2 touchOrigin = -Vector2.one;
 	
 	
@@ -25,7 +24,7 @@ public class Player : MovingObject
 		//Get a component reference to the Player's animator component
 		animator = GetComponent<Animator>();
 
-		position = transform.position;
+		//position = transform.position;
 		//transform = transform;
 		
 		//Get the current food point total stored in GameManager.instance between levels.
@@ -282,11 +281,6 @@ public class Player : MovingObject
 			//GameManager.instance.GameOver ();
 		}
 		*/
-	}
-
-	IEnumerator WaitForMovement() {
-		yield return new WaitForSeconds (0.1f);
-		isMoving = false;
 	}
 
 }
