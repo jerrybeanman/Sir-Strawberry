@@ -8,8 +8,9 @@ public abstract class PlayerMenu : MonoBehaviour {
 	public class Spacing	{	public float width, height;	}
 	[System.Serializable]
 	public class SlotSize	{	public float width, height;	}
+    //used to position where the tooltip & player stat boxes
 	[System.Serializable]
-	public class ToolTip 	{	public Position position; 	public SlotSize slotsize;}
+	public class RectValue 	{	public Position position; 	public SlotSize slotsize;}
 
 	public float BackGroundYCor;
 	public float BackGroundHeight;
@@ -19,7 +20,8 @@ public abstract class PlayerMenu : MonoBehaviour {
 	public Spacing spacing;
 	//size of each slot
 	public SlotSize slotsize;
-	public ToolTip TooltipValues;
+	public RectValue TooltipValues;
+    public RectValue PlayerStatValues;
 
 	//contains valid/existing items that the player already have
 	[HideInInspector]public List<Item> current = new List<Item>();
@@ -34,16 +36,16 @@ public abstract class PlayerMenu : MonoBehaviour {
 	protected bool showTooltip;
 	//information to display in the tooltip box
 	protected string tooltip;
-	
+
 	//set tot true when a item is currently being dragged. 
-	[HideInInspector]public static bool draggingItem;
+	protected static bool draggingItem;
 	//current item that is being dragged. 
-	[HideInInspector]public static Item draggedItem;
+	protected static Item draggedItem;
 	//The index where the item is being dragged off of so we can swap it with another item when dropped. *DOES NOT WORK*
 	protected int prevIndex;
 
 	public int width, height;
-
+    
 	protected bool isInventory;
 	void OnGUI()
 	{
@@ -53,9 +55,12 @@ public abstract class PlayerMenu : MonoBehaviour {
 		//pretty straightforward, not much to explain here
 		if(showPlayerMenu)
 		{
+            //draw the background picture
 			GUI.Box(new Rect(1, Screen.height / BackGroundYCor, Screen.width, Screen.height / BackGroundHeight), 
 			        "", skin.GetStyle("Background"));
+            //draw the corresponding slots
 			Draw ();
+            DrawStat();
 			if(showTooltip)
 				DrawTooltip();
 		}
@@ -78,22 +83,12 @@ public abstract class PlayerMenu : MonoBehaviour {
 		{
 			for(int x = 0; x < width; x++)
 			{
-				//position to draw Empty slots and items. This is scaled so to the size of the screen so it is platform independent
-				Rect slotRect = new Rect(Screen.width / position.xCor + x * Screen.width / spacing.width, 
-				                         Screen.height / position.yCor + y * Screen.width / spacing.height, 
-				                         Screen.width / slotsize.width, 
-				                         Screen.height / slotsize.height);
-				if(!isInventory)
-				{
-					if((x != 0 || y != 0) && (x != width -1 || y != 0) && (x != width -2 || y != height -1))
-						GUI.Box (slotRect, "", skin.GetStyle ("Slot"));
-				}else
-					GUI.Box (slotRect, "", skin.GetStyle ("Slot"));
-				
-				//assign all item in the inventory to slots so we can keep track what each slot contains
-				slots[i] = current[i];
-				//Current item
-				Item item = slots[i];
+               Rect slotRect =  DrawSlots(x, y);
+
+                //assign all item in the inventory to slots so we can keep track what each slot contains
+                slots[i] = current[i];
+                //Current item
+                Item item = slots[i];
 				//check if an existing item is assigned to slot
 				if(item.Exist)
 				{
@@ -103,11 +98,11 @@ public abstract class PlayerMenu : MonoBehaviour {
 					//Check if mouse is hovering over an existing item
 					if(slotRect.Contains(e.mousePosition))
 					{
-						tooltip = item.ToString();
+                        tooltip = item.ToString();
 						showTooltip = true;
 						
 						//if mouse is right clicked on the item
-						if(e.isMouse && e.type == EventType.mouseDown && e.button == 1 && isInventory)
+						if(e.isMouse && e.type == EventType.mouseDown && e.button == 1)
 						{
 							if(item is Weapon)
 								EquipWeapon(item, i);
@@ -157,7 +152,7 @@ public abstract class PlayerMenu : MonoBehaviour {
 		                  Screen.height / TooltipValues.slotsize.height), tooltip, skin.GetStyle("Tooltip"));
 	}
 
-	public virtual void Drag(int i, Item item)
+	protected virtual void Drag(int i, Item item)
 	{
 		ItemFactory factory = new ItemFactory();
 		draggingItem = true;
@@ -168,7 +163,7 @@ public abstract class PlayerMenu : MonoBehaviour {
 		current [i] = factory.CreateItem (current [i].Type);
 	}
 	
-	public virtual void DropSwap(int i)
+	protected virtual void DropSwap(int i)
 	{
 		current[prevIndex] = current[i];
 		current[i] = draggedItem;
@@ -176,7 +171,7 @@ public abstract class PlayerMenu : MonoBehaviour {
 		draggedItem = null;
 	}
 	
-	public virtual void DropAssign(int i)
+	protected virtual void DropAssign(int i)
 	{
 			current [i] = draggedItem;
 			draggingItem = false;
@@ -238,5 +233,8 @@ public abstract class PlayerMenu : MonoBehaviour {
 		print ("Potion Euipped");
 		current[i] = new Item();
 	}
+
+    protected abstract void DrawStat();
+    protected abstract Rect DrawSlots(int x, int y);
 
 }

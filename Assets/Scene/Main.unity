@@ -523,24 +523,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec69c612bd91f7e40a6bedde20ed5aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackGroundYCor: 3.5
-  BackGroundHeight: 1.64999998
+  BackGroundYCor: 7.75
+  BackGroundHeight: 1.39999998
   position:
     xCor: 1.79999995
-    yCor: 3.5
+    yCor: 4
   spacing:
-    width: 6.75
-    height: 6.4000001
+    width: 8
+    height: 8
   slotsize:
-    width: 7.5
-    height: 11.75
+    width: 9
+    height: 14
   TooltipValues:
     position:
-      xCor: 2.5
-      yCor: 1.64999998
+      xCor: 1.95000005
+      yCor: 1.95000005
     slotsize:
-      width: 1.75
-      height: 3.75
+      width: 2.54999995
+      height: 4.5999999
+  PlayerStatValues:
+    position:
+      xCor: 0
+      yCor: 0
+    slotsize:
+      width: 0
+      height: 0
   current: []
   slots: []
   skin: {fileID: 11400000, guid: a7ae303ddfbca6243ad937b0bf1a18ef, type: 2}
@@ -727,6 +734,14 @@ Prefab:
     - target: {fileID: 11417560, guid: 56fa2ec634f059e4b8ac1f5dc7df2b77, type: 2}
       propertyPath: blockingLayer.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 11417560, guid: 56fa2ec634f059e4b8ac1f5dc7df2b77, type: 2}
+      propertyPath: playerStat.MaxHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11417560, guid: 56fa2ec634f059e4b8ac1f5dc7df2b77, type: 2}
+      propertyPath: playerStat.MaxMp
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56fa2ec634f059e4b8ac1f5dc7df2b77, type: 2}
@@ -1669,14 +1684,14 @@ MonoBehaviour:
   BackGroundYCor: 0
   BackGroundHeight: 0
   position:
-    xCor: 65
-    yCor: 3.5
+    xCor: 10
+    yCor: 4
   spacing:
-    width: 6.75
-    height: 6.4000001
+    width: 8
+    height: 8
   slotsize:
-    width: 7.5
-    height: 11.75
+    width: 9
+    height: 14
   TooltipValues:
     position:
       xCor: 0
@@ -1684,6 +1699,13 @@ MonoBehaviour:
     slotsize:
       width: 0
       height: 0
+  PlayerStatValues:
+    position:
+      xCor: 10
+      yCor: 1.95000005
+    slotsize:
+      width: 2.98000002
+      height: 5.28000021
   current: []
   slots: []
   skin: {fileID: 11400000, guid: a7ae303ddfbca6243ad937b0bf1a18ef, type: 2}

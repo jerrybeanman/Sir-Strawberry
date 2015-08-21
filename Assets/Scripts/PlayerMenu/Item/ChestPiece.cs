@@ -13,4 +13,12 @@ public class ChestPiece : Armor {
 	{
 
 	}
+    public override void AddStat()
+    {
+        base.AddStat();
+    }
+    public override void RemoveStat()
+    {
+        base.RemoveStat();
+    }
 }

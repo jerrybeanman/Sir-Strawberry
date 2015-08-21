@@ -89,8 +89,6 @@ public class Enemy : MovingObject {
 		//Declare hitPlayer and set it to equal the encountered component.
 		Player hitPlayer = component as Player;
 
-		// Simulate the enemy hitting the player
-		GameManager.manager.experience++;
 
 		//Call the LoseFood function of hitPlayer passing it playerDamage, the amount of foodpoints to be subtracted.
 		//hitPlayer.LoseFood (playerDamage);

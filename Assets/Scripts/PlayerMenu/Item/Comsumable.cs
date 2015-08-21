@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
 [System.Serializable]
 public class Comsumable : Item {
 
@@ -26,4 +28,13 @@ public class Comsumable : Item {
 		s += "<b><color=#4DA4BF>" +  "+MP:" + "</color></b>" + comMp.ToString() + "\n";
 		return s;
 	}
+
+    public override void AddStat()
+    {
+       
+    }
+    public override void RemoveStat()
+    {
+        
+    }
 }

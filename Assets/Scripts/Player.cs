@@ -5,55 +5,46 @@ using System.Collections;
 public class Player : MovingObject
 {
 	public float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
-	//public int pointsPerFood = 10;              //Number of points to add to player food points when picking up a food object.
-	//public int pointsPerSoda = 20;              //Number of points to add to player food points when picking up a soda object.
-	//public int wallDamage = 1;                  //How much damage a player does to a wall when chopping it.
+    public static Player instance;
 	
 	
 	private Animator animator;                  //Used to store a reference to the Player's animator component.
-	//private int food;                           //Used to store player food points total during level.
-	private int health;
+    public PlayerStat playerStat;
 	private Vector3 position;
 	//private Transform transform;
 	private Vector2 touchOrigin = -Vector2.one;
-	
-	
+
+
+    protected void Awake()
+    {
+        // Singleton design pattern. If gameManager doesnt exist, this becomes our manager.
+        // If it does exist, do not overwrite it.
+        if (instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 	//Start overrides the Start function of MovingObject
 	protected override void Start ()
 	{
 		//Get a component reference to the Player's animator component
 		animator = GetComponent<Animator>();
-
-		//position = transform.position;
-		//transform = transform;
-		
-		//Get the current food point total stored in GameManager.instance between levels.
-		//food = GameManager.instance.playerFoodPoints;
-		//print (food);
 		
 		//Call the Start function of the MovingObject base class.
 		base.Start ();
 	}
 	
 	
-	//This function is called when the behaviour becomes disabled or inactive.
-	private void OnDisable ()
-	{
-		//When Player object is disabled, store the current local food total in the GameManager so it can be re-loaded in next level.
-		//GameManager.instance.playerFoodPoints = food;
-	}
 	
 	
 	private void Update ()
 	{
-		/*
-		if (isMoving) {
-			return;
-		}
-
-		isMoving = true;
-		*/
-
 		// If the player is moving already, do nothing
 		if (!GameManager.manager.playersTurn)
 			return;
@@ -182,7 +173,7 @@ public class Player : MovingObject
 		//If Move returns true, meaning Player was able to move into an empty space.
 		if (Move (xDir, yDir, out hit)) 
 		{
-			GameManager.manager.health++;
+			playerStat.CurrentHp++;
 
 			//Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
 		}
@@ -282,5 +273,26 @@ public class Player : MovingObject
 		}
 		*/
 	}
+
+    public string StatToString()
+    {
+        string s = "";
+        s += "<b><color=#4DA4BF>" + "HP: " + "</color></b>" + playerStat.CurrentHp + "/" + playerStat.MaxHp + "\n\n";
+        s += "<b><color=#4DA4BF>" + "MP: " + "</color></b>" + playerStat.CurrentMp + "/" + playerStat.MaxMp + "\n\n";
+        s += "<b><color=#4DA4BF>" + "ATK: " + "</color></b>" + playerStat.AtkPower + "\n\n";
+        s += "<b><color=#4DA4BF>" + "SPD: " + "</color></b>" + playerStat.AtkSpeed + "\n\n";
+        return s;
+
+    }
+    [System.Serializable]
+    public class PlayerStat
+    {
+        public float CurrentHp;
+        public float MaxHp;
+        public float CurrentMp;
+        public float MaxMp;
+        public float AtkPower;
+        public float AtkSpeed;
+    }
 
 }

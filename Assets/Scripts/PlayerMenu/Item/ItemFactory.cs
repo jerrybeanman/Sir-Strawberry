@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ItemFactory : MonoBehaviour {
+public class ItemFactory{
 
 	public Item CreateItem(string type)
 	{

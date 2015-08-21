@@ -25,4 +25,12 @@ public class Armor : Item {
 		s += "<b><color=#4DA4BF>" +  "+HP:" + "</color></b>" + armorHp.ToString() + "\n";
 		return s;
 	}
+    public override void AddStat()
+    {
+        Player.instance.playerStat.MaxHp += armorHp;
+    }
+    public override void RemoveStat()
+    {
+        Player.instance.playerStat.MaxHp -= armorHp;
+    }
 }
