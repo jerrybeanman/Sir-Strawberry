@@ -6,37 +6,47 @@ public class Player : MovingObject
 {
 	private Animator animator;                  //Used to store a reference to the Player's animator component.
 	private int health;
+	public float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
+    public static Player instance;
+	
+	
+	private Animator animator;                  //Used to store a reference to the Player's animator component.
+    public PlayerStat playerStat;
 	private Vector3 position;
 	//private Transform transform;
 	private Vector2 touchOrigin = -Vector2.one;
-	
-	
+
+
+    protected void Awake()
+    {
+        // Singleton design pattern. If gameManager doesnt exist, this becomes our manager.
+        // If it does exist, do not overwrite it.
+        if (instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 	//Start overrides the Start function of MovingObject
 	protected override void Start ()
 	{
 		//Get a component reference to the Player's animator component
 		animator = GetComponent<Animator>();
-
-		//position = transform.position;
-		//transform = transform;
 		
 		//Call the Start function of the MovingObject base class.
 		base.Start ();
 	}
 	
 	
-	//This function is called when the behaviour becomes disabled or inactive.
-	private void OnDisable ()
-	{
-		//When Player object is disabled, store the current local food total in the GameManager so it can be re-loaded in next level.
-		//GameManager.instance.playerFoodPoints = food;
-	}
 	
 	
 	private void Update ()
 	{
-		// If the player is moving already, return early. (do not enter the rest of this method)
-		// This prevents multiple inputs being given by the user, causing the play to move erratically.
 		if (!GameManager.manager.playersTurn)
 			return;
 
@@ -162,8 +172,6 @@ public class Player : MovingObject
 		//If Move returns true, meaning Player was able to move into an empty space.
 		if (Move (xDir, yDir, out hit)) 
 		{
-			// This is a test variable to prove architecture.
-			GameManager.manager.health++;
 
 			//Call sound effects as needed
 		}
@@ -265,5 +273,26 @@ public class Player : MovingObject
 		}
 		*/
 	}
+
+    public string StatToString()
+    {
+        string s = "";
+        s += "<b><color=#4DA4BF>" + "HP: " + "</color></b>" + playerStat.CurrentHp + "/" + playerStat.MaxHp + "\n\n";
+        s += "<b><color=#4DA4BF>" + "MP: " + "</color></b>" + playerStat.CurrentMp + "/" + playerStat.MaxMp + "\n\n";
+        s += "<b><color=#4DA4BF>" + "ATK: " + "</color></b>" + playerStat.AtkPower + "\n\n";
+        s += "<b><color=#4DA4BF>" + "SPD: " + "</color></b>" + playerStat.AtkSpeed + "\n\n";
+        return s;
+
+    }
+    [System.Serializable]
+    public class PlayerStat
+    {
+        public float CurrentHp;
+        public float MaxHp;
+        public float CurrentMp;
+        public float MaxMp;
+        public float AtkPower;
+        public float AtkSpeed;
+    }
 
 }

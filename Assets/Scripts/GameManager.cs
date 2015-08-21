@@ -8,11 +8,6 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager manager;
-	// Health is a testing variable
-	public float health;
-	// Experience is a testing variable
-	public float experience;
-	// playersTurn determines when the user can input movements
 	public bool playersTurn = true;
 	// wait ensures that the game waits before allowing the player to move again
 	public bool wait = false;
@@ -40,8 +35,7 @@ public class GameManager : MonoBehaviour {
 	// This creates test buttons to prove architecture.
 	void OnGUI() {
 		// Display health and experience on the screen.
-		GUI.Label(new Rect(10,10,100,30), "health: " + health);
-		GUI.Label(new Rect(10,40,100,30), "experience: " + experience);
+		GUI.Label(new Rect(10,10,100,30), "health: " + Player.instance.playerStat.CurrentHp + "/" + Player.instance.playerStat.MaxHp);
 
 		// Test save and load buttons.
 		if (GUI.Button (new Rect (170, 10, 50, 25), "Save")) {
@@ -99,8 +93,7 @@ public class GameManager : MonoBehaviour {
 		// Creates our player data object
 		PlayerData data = new PlayerData();
 		// Transfers our current health and experience over to our new playerdata object.
-		data.health = health;
-		data.experience = experience;
+		data.playerStat= Player.instance.playerStat;
 		data.inventory = Inventory.instance.current;
 		data.slots = Inventory.instance.slots;
 
@@ -120,9 +113,8 @@ public class GameManager : MonoBehaviour {
 			FileStream file = File.Open (filePath, FileMode.Open);
 			PlayerData data = (PlayerData)bf.Deserialize (file);
 			file.Close ();
-			// Transfers our saved data back to our gameManager object.
-			health = data.health;
-			experience = data.experience;
+            // Transfers our saved data back to our gameManager object.
+            Player.instance.playerStat = data.playerStat;
 
 			Inventory.instance.current = data.inventory;
 			Inventory.instance.slots = data.slots;
@@ -130,17 +122,14 @@ public class GameManager : MonoBehaviour {
 			print("You do not have a saved file to load");
 		}
 	}
-
-
-}
-
-// This class holds our persistent data. It it what is saved to local machine/server.
-// eg. items, health, level, experience, ...
-[Serializable]
-class PlayerData {
-	public float health;
-	public float experience;
-	public List<Item> inventory;
-	public List<Item> slots;
+    // This class holds our persistent data. It it what is saved to local machine/server.
+    // eg. items, health, level, experience, ...
+    [Serializable]
+    class PlayerData
+    {
+        public Player.PlayerStat playerStat;
+        public List<Item> inventory;
+        public List<Item> slots;
+    }
 
 }

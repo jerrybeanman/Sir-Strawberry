@@ -81,8 +81,7 @@ public class Enemy : MovingObject {
 		//Declare hitPlayer and set it to equal the encountered component.
 		Player hitPlayer = component as Player;
 
-		// Testing variable. Eventually this would be player hit points.
-		GameManager.manager.experience++;
+
 		
 		//Set the attack trigger of animator to trigger Enemy attack animation.
 		//animator.SetTrigger ("enemyAttack");

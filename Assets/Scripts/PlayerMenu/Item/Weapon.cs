@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
 [System.Serializable]
 public class Weapon : Item {
 
@@ -28,4 +30,14 @@ public class Weapon : Item {
 		s += "<b><color=#4DA4BF>" +  "+SPD:" + "</color></b>" + weaponSpeed.ToString() + "\n";
 		return s;
 	}
+    public override void AddStat()
+    {
+        Player.instance.playerStat.AtkPower += weaponPower;
+        Player.instance.playerStat.AtkSpeed += weaponSpeed;
+    }
+    public override void RemoveStat()
+    {
+        Player.instance.playerStat.AtkPower -= weaponPower;
+        Player.instance.playerStat.AtkSpeed -= weaponSpeed;
+    }
 }

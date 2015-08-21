@@ -30,7 +30,7 @@ public class Item {
 		exist = true;
 	}
 
-	virtual public string ToString()
+	public virtual string ToString()
 	{
 		string s;
 		s = "<b><color=#4DA4BF>" + itemName + "</color></b>\n\n";
@@ -40,4 +40,6 @@ public class Item {
 	}
 
 	public Item(){	}
+    public virtual void AddStat() { }
+    public virtual void RemoveStat() { }
 }

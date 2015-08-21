@@ -29,23 +29,49 @@ public class Armory : PlayerMenu {
 		current.Add (new Comsumable ());
 		current.Add (new Item ());
 		current.Add (new Comsumable ());
+        
 	}
 	
-	public override void Drag(int i, Item item)
+	protected override void Drag(int i, Item item)
 	{
+        current[i].RemoveStat();
 		base.Drag (i, item);
 	}
 	
-	public override void DropSwap(int i)
+	protected override void DropSwap(int i)
 	{
 		base.DropSwap (i);
 	}
 	
-	public override void DropAssign(int i)
+	protected override void DropAssign(int i)
 	{
-		if(current[i].GetType() == draggedItem.GetType())
-			base.DropAssign (i);
-	}
+        print(current[i].GetType() + " " + draggedItem.GetType());
+        if (current[i].GetType() == draggedItem.GetType())
+        {
+            base.DropAssign(i);
+            current[i].AddStat();
+        }
+    }
 
+    protected override Rect DrawSlots(int x, int y)
+    {
+        //position to draw Empty slots and items. This is scaled so to the size of the screen so it is platform independent
+        Rect slotRect = new Rect(Screen.width / position.xCor + x * Screen.width / spacing.width,
+                                 Screen.height / position.yCor + y * Screen.width / spacing.height,
+                                 Screen.width / slotsize.width,
+                                 Screen.height / slotsize.height);
+        if ((x != 0 || y != 0) && (x != width - 1 || y != 0) && (x != width - 2 || y != height - 1))
+            GUI.Box(slotRect, "", skin.GetStyle("Slot"));
+        return slotRect;
+    }
+
+    protected override void DrawStat()
+    {
+        GUI.Box(new Rect(Screen.width / PlayerStatValues.position.xCor,
+                          Screen.height / PlayerStatValues.position.yCor,
+                          Screen.width / PlayerStatValues.slotsize.width,
+                          Screen.height / PlayerStatValues.slotsize.height), Player.instance.StatToString(), 
+                          skin.GetStyle("Tooltip"));
+    }
 
 }
