@@ -10,7 +10,7 @@ public class Player : MovingObject
     public static Player instance;
 	
 	
-	private Animator animator;                  //Used to store a reference to the Player's animator component.
+	
     public PlayerStat playerStat;
 	private Vector3 position;
 	//private Transform transform;
